@@ -1,0 +1,54 @@
+[
+    {
+        "title": "Self-supervised Enhancement for Named Entity Disambiguation via Multimodal Graph Convolution",
+        "author": [ "Pengfei Zhou", "Kaining Ying", "Zhenhua Wang", "Dongyan Guo", "Cong Bai"],
+        "description": "We present MMGraph, which uses multimodal graph convolution to aggregate visual and contextual language information for accurate entity disambiguation for short texts, and a self-supervised framework Simple Triplet (SimTri) that can learn useful representations in multimodal unlabeled data to enhance the effectiveness of NED models.",
+        "year": "2022",
+        "publisher": "IEEE Transactions on Neural Networks and Learning Systems (TNNLS)",
+        "image": "./files/papers/mmgraph_tnnls_2022/mmgraph.png",
+        "pdf": "./files/papers/mmgraph_tnnls_2022/mmgraph.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "BibTex": "./files/papers/mmgraph_tnnls_2022/zhou2022self.bib",
+            "GitHub": "https://github.com/LanceZPF/NNED_MMGraph",
+            "Early Access": "https://ieeexplore.ieee.org/document/9774860"
+        }
+    },
+    {
+        "title": "ISDA: Position-Aware Instance Segmentation with Deformable Attention",
+        "author": ["Kaining Ying", "Zhenhua Wang", "Cong Bai", "Pengfei Zhou"],
+        "description": "We present a novel end-to-end Instance Segmentation framework based on Transformer and get 38.7 mAP with ResNet-50 on MS COCO test-dev.",
+        "year": "2022",
+        "publisher": "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+        "image": "./files/papers/isda_icassp_2022/isda.png",
+        "pdf": "./files/papers/isda_icassp_2022/camera_ready.pdf",
+        "equal": false,
+        "oral": true,
+        "meta" :{
+            "BibTex": "./files/papers/isda_icassp_2022/ying2022isda.bib",
+            "GitHub": "https://github.com/yingkaining/isda",
+            "arXiv": "https://arxiv.org/abs/2202.12251",
+            "Poster": "./files/papers/isda_icassp_2022/poster.pdf",
+            "Video": "https://www.bilibili.com/video/BV1RT4y1Y7qW?spm_id_from=333.999.0.0",
+            "Slides": "./files/papers/isda_icassp_2022/slides.pdf"
+        }
+    },
+    {
+        "title": "RWMF: A Real-World Multimodal Foodlog Database",
+        "author": ["Pengfei Zhou", "Cong Bai", "Kaining Ying", "Jie Xia", "Lixin Huang"],
+        "description": "We establish a real-world foodlog database using various methods such as filters, clusters and graph convolutional networks. This database is built based on real-world lifelog and medical data, which is named as Real-World Multimodal Foodlog (RWMF).",
+        "year": "2020",
+        "publisher": "International Conference on Pattern Recognition (ICPR)",
+        "image": "./files/papers/rwmf_icpr_2020/rwmf.png",
+        "pdf": "./files/papers/rwmf_icpr_2020/rwmf.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "BibTex": "./files/papers/rwmf_icpr_2020/zhou2021rwmf.bib",
+            "DataPort": "https://ieee-dataport.org/open-access/rwmf-real-world-multimodal-foodlog-database",
+            "Poster": "./files/papers/rwmf_icpr_2020/poster.pdf",
+            "Video": "https://www.bilibili.com/video/BV19M411k73f/"
+        }
+    }
+]
