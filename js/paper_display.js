@@ -61,7 +61,7 @@ window.onload = function() {
                         <a href=" + pdf + " style='font-size:18px'>" + title + "</a> &nbsp&nbsp\
                         <br>" + author_str + 
                         "<br>\
-                        <em>"+ publisher + "&ensp" + year + oral_str + equal_str + "</em> ,\
+                        <em>"+ publisher + "  " + year + oral_str + equal_str + "</em> ,\
                         <br>\
                         <font color='black'> " + description +"<br>\
                         " + meta_str + " <br> \
