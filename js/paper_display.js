@@ -1,7 +1,7 @@
 var html = ""
 
 window.onload = function() {
-    var url = "./paper.json"
+    var url = "../paper.json"
     var request = new XMLHttpRequest();
     request.open("get", url);
     request.send(null);
