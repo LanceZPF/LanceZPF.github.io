@@ -11,8 +11,22 @@
         "oral": false,
         "meta" :{
             "BibTex": "./files/papers/mmgraph_tnnls_2022/zhou2022self.bib",
-            "GitHub": "https://github.com/LanceZPF/NNED_MMGraph",
-            "Early Access": "https://ieeexplore.ieee.org/document/9774860"
+            "GitHub": "https://github.com/LanceZPF/NNED_MMGraph"
+        }
+    },
+    {
+        "title": "CMRDF: A real-time food alerting system based on multimodal data",
+        "author": [ "Pengfei Zhou", "Cong Bai", "Jie Xia", "Shengyong Chen"],
+        "description": "we propose a novel system called Cross-Modal Retrieval on Diabetogenic Food (CMRDF), which realizes a real-time dietary notice based on multimodal data captured from wearable devices.",
+        "year": "2022",
+        "publisher": "IEEE Internet of Things Journal (IoTJ)",
+        "image": "./files/papers/cmrdf_iotj_2022/cmrdf.png",
+        "pdf": "./files/papers/cmrdf_iotj_2022/cmrdf.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "BibTex": "./files/papers/cmrdf_iotj_2022/zhou2022cmrdf.bib",
+            "GitHub": "https://github.com/LanceZPF/CMRDF"
         }
     },
     {
@@ -35,6 +49,21 @@
         }
     },
     {
+        "title": "Exploring Implicit and Explicit Relations with the Dual Relation-Aware Network for Image Captioning",
+        "author": ["Zhiwei Zha", "Pengfei Zhou", "Cong Bai"],
+        "description": "We introduce a novel dual relation-aware network (DRAN) for image captioning which composes of a dual-path relation encoder and an adaptive context relation decoder. The DRAN can address the problem that the relations that just appeared in sentences but cannot be visually observed in images",
+        "year": "2022",
+        "publisher": "International Conference on Multimedia Modeling (MMM)",
+        "image": "./files/papers/dran_mmm_2022/dran.png",
+        "pdf": "./files/papers/dran_mmm_2022/dran.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "BibTex": "./files/papers/dran_mmm_2022/dran.bib",
+            "GitHub": "https://github.com/Zjut-MultimediaPlus/DRAN"
+        }
+    },
+    {
         "title": "RWMF: A Real-World Multimodal Foodlog Database",
         "author": ["Pengfei Zhou", "Cong Bai", "Kaining Ying", "Jie Xia", "Lixin Huang"],
         "description": "We establish a real-world foodlog database using various methods such as filters, clusters and graph convolutional networks. This database is built based on real-world lifelog and medical data, which is named as Real-World Multimodal Foodlog (RWMF).",
@@ -49,6 +78,20 @@
             "DataPort": "https://ieee-dataport.org/open-access/rwmf-real-world-multimodal-foodlog-database",
             "Poster": "./files/papers/rwmf_icpr_2020/poster.pdf",
             "Video": "https://www.bilibili.com/video/BV19M411k73f/"
+        }
+    },
+    {
+        "title": "ZJUTCVR Team at ImageCLEFlifelog2019 Lifelog Moment Retrieval Task",
+        "author": ["Pengfei Zhou", "Cong Bai", "Jie Xia"],
+        "description": "We use several different methods to provide a flexible retrieval system based on the huge amounts of multi-modal dataset. The work proposes a supervised learning approach with high precision and two exploratory approaches. We reach the second rank with F1-measure@10=0.44 in the ImageCLEFlifelog 2019 evaluation system.",
+        "year": "2019",
+        "publisher": "CLEF (Working Notes)",
+        "image": "./files/papers/zjutcvr_clef_2019/zjutcvr.png",
+        "pdf": "./files/papers/zjutcvr_clef_2019/zjutcvr.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "BibTex": "./files/papers/zjutcvr_clef_2019/zjutcvr.bib"
         }
     }
 ]
