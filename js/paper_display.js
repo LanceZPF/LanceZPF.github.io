@@ -23,12 +23,12 @@ window.onload = function() {
                 
                 oral_str = ""
                 if(oral == true) {
-                    oral_str = "(Oral)"
+                    oral_str = "  (Oral)"
                 }
 
                 var equal_str = ""
                 if(equal == true) {
-                    equal_str = "(* Equal contribution)"
+                    equal_str = "  (* Equal contribution)"
                 }
 
                 for(var j=0 ; j<author.length ; j++){
