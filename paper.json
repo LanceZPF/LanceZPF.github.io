@@ -17,7 +17,7 @@
     {
         "title": "CMRDF: A real-time food alerting system based on multimodal data",
         "author": [ "Pengfei Zhou", "Cong Bai", "Jie Xia", "Shengyong Chen"],
-        "description": "we propose a novel system called Cross-Modal Retrieval on Diabetogenic Food (CMRDF), which realizes a real-time dietary notice based on multimodal data captured from wearable devices.",
+        "description": "We propose a novel system called Cross-Modal Retrieval on Diabetogenic Food (CMRDF), which realizes a real-time dietary notice based on multimodal data captured from wearable devices.",
         "year": "2022",
         "publisher": "IEEE Internet of Things Journal (IoTJ)",
         "image": "./files/papers/cmrdf_iotj_2022/cmrdf.png",
