@@ -51,7 +51,7 @@
     {
         "title": "Exploring Implicit and Explicit Relations with the Dual Relation-Aware Network for Image Captioning",
         "author": ["Zhiwei Zha", "Pengfei Zhou", "Cong Bai"],
-        "description": "We introduce a novel dual relation-aware network (DRAN) for image captioning which composes of a dual-path relation encoder and an adaptive context relation decoder. The DRAN can address the problem that the relations that just appeared in sentences but cannot be visually observed in images",
+        "description": "We introduce a novel Dual Relation-Aware Network (DRAN) for image captioning which composes of a dual-path relation encoder and an adaptive context relation decoder. The DRAN can address the problem that the relations that just appeared in sentences but cannot be visually observed in images",
         "year": "2022",
         "publisher": "International Conference on Multimedia Modeling (MMM)",
         "image": "./files/papers/dran_mmm_2022/dran.png",
