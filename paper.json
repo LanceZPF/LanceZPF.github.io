@@ -1,5 +1,21 @@
 [
     {
+        "title": "SeeDS: Semantic Separable Diffusion Synthesizer for Zero-shot Food Detection",
+        "author": [ "Pengfei Zhou", "Weiqing Min", "Yang Zhang", "Jiajun Song", "Ying Jin", "Shuqiang Jiang"],
+        "description": "We propose a new task: Zero-Shot Food Detection (ZSFD). We also present SeeDS, which adopts Semantic Separable Synthesizing Module and Region Feature Denoising Diffusion Model to achieve fine-grained ZSFD. In addition, we establish the first ZSFD dataset and name it as ZSFooD.",
+        "year": "2023",
+        "publisher": "ACM International Conference on Multimedia (ACM MM)",
+        "image": "./files/papers/seeds_acmmm_2023/seeds.png",
+        "pdf": "./files/papers/seeds_acmmm_2023/seeds.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "BibTex": "./files/papers/seeds_acmmm_2023/zhou2023seeds.bib",
+            "GitHub": "https://github.com/LanceZPF/SeeDS",
+            "arXiv": "https://arxiv.org/abs/2310.04689"
+        }
+    },
+    {
         "title": "Self-supervised Enhancement for Named Entity Disambiguation via Multimodal Graph Convolution",
         "author": [ "Pengfei Zhou", "Kaining Ying", "Zhenhua Wang", "Dongyan Guo", "Cong Bai"],
         "description": "We present MMGraph, which uses multimodal graph convolution to aggregate visual and contextual language information for accurate entity disambiguation for short texts, and a self-supervised framework Simple Triplet (SimTri) that can learn useful representations in multimodal unlabeled data to enhance the effectiveness of NED models.",
