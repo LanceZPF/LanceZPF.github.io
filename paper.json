@@ -55,7 +55,7 @@
         "publisher": "IEEE Transactions on Neural Networks and Learning Systems (TNNLS)",
         "image": "./files/papers/mmgraph_tnnls_2022/mmgraph.png",
         "pdf": "./files/papers/mmgraph_tnnls_2022/mmgraph.pdf",
-        "equal": false,
+        "equal": false, 
         "oral": false,
         "meta" :{
             "BibTex": "./files/papers/mmgraph_tnnls_2022/zhou2022self.bib",
