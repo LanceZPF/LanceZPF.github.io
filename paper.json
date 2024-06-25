@@ -1,7 +1,39 @@
 [
     {
+        "title": "FoodSky: A Food-oriented Large Language Model that Passes the Chef and Dietetic Examination",
+        "author": ["Pengfei Zhou", "Weiqing Min", "Chaoran Fu", "Ying Jin", "Mingyu Huang", "Xiangyang Li", "Shuhuan Mei", "Shuqiang Jiang"],
+        "description": "FoodSky is a domain-specific Large Language Model (LLM) that utilizes the FoodEarth corpus and proposed Topic-based Selective State Space Model (TS3M) and Hierarchical Topic Retrieval Augmented Generation (HTRAG) to excel in food-related tasks, notably outperforming general LLMs in chef and dietetic exams.",
+        "year": "2024",
+        "publisher": "arXiv",
+        "image": "./files/papers/foodsky_arxiv_2024/foodsky.png",
+        "pdf": "./files/papers/foodsky_arxiv_2024/foodsky.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "Demo": "http://222.92.101.211:8200",
+            "BibTex": "./files/papers/foodsky_arxiv_2024/foodsky.bib",
+            "arXiv": "https://arxiv.org/abs/2406.10261"
+        }
+    },
+    {
+        "title": "Synthesizing Knowledge-enhanced Features for Real-world Zero-shot Food Detection",
+        "author": ["Pengfei Zhou", "Weiqing Min", "Jiajun Song", "Yang Zhang", "Shuqiang Jiang"],
+        "description": "We introduce ZSFDet, a framework that leverages multi-source graphs and Knowledge-Enhanced Feature Synthesizer (KEFS) to enhance feature synthesis and improve the accuracy of zero-shot food detection. We also extend a more comprehensive dataset, named Food Objects With Attributes (FOWA).",
+        "year": "2024",
+        "publisher": "IEEE Transactions on Image Processing (TIP)",
+        "image": "./files/papers/zsfdet_tip_2024/zsfdet.png",
+        "pdf": "./files/papers/zsfdet_tip_2024/zsfdet.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "BibTex": "./files/papers/zsfdet_tip_2024/zsfdet.bib",
+            "GitHub": "https://github.com/LanceZPF/KEFS",
+            "arXiv": "https://arxiv.org/abs/2402.09242"
+        }
+    },
+    {
         "title": "SeeDS: Semantic Separable Diffusion Synthesizer for Zero-shot Food Detection",
-        "author": [ "Pengfei Zhou", "Weiqing Min", "Yang Zhang", "Jiajun Song", "Ying Jin", "Shuqiang Jiang"],
+        "author": ["Pengfei Zhou", "Weiqing Min", "Yang Zhang", "Jiajun Song", "Ying Jin", "Shuqiang Jiang"],
         "description": "We propose a new task: Zero-Shot Food Detection (ZSFD). We also present SeeDS, which adopts Semantic Separable Synthesizing Module and Region Feature Denoising Diffusion Model to achieve fine-grained ZSFD. In addition, we establish the first ZSFD dataset and name it as ZSFooD.",
         "year": "2023",
         "publisher": "ACM International Conference on Multimedia (ACM MM)",
@@ -17,7 +49,7 @@
     },
     {
         "title": "Self-supervised Enhancement for Named Entity Disambiguation via Multimodal Graph Convolution",
-        "author": [ "Pengfei Zhou", "Kaining Ying", "Zhenhua Wang", "Dongyan Guo", "Cong Bai"],
+        "author": ["Pengfei Zhou", "Kaining Ying", "Zhenhua Wang", "Dongyan Guo", "Cong Bai"],
         "description": "We present MMGraph, which uses multimodal graph convolution to aggregate visual and contextual language information for accurate entity disambiguation for short texts, and a self-supervised framework Simple Triplet (SimTri) that can learn useful representations in multimodal unlabeled data to enhance the effectiveness of NED models.",
         "year": "2022",
         "publisher": "IEEE Transactions on Neural Networks and Learning Systems (TNNLS)",
@@ -32,7 +64,7 @@
     },
     {
         "title": "CMRDF: A Real-Time Food Alerting System Based on Multimodal Data",
-        "author": [ "Pengfei Zhou", "Cong Bai", "Jie Xia", "Shengyong Chen"],
+        "author": ["Pengfei Zhou", "Cong Bai", "Jie Xia", "Shengyong Chen"],
         "description": "We propose a novel system called Cross-Modal Retrieval on Diabetogenic Food (CMRDF), which realizes a real-time dietary notice based on multimodal data captured from wearable devices.",
         "year": "2022",
         "publisher": "IEEE Internet of Things Journal (IoTJ)",
