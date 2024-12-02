@@ -10,7 +10,7 @@
         "equal": false,
         "oral": false,
         "meta" :{
-            "Homepage": "https://lancezpf.github.io/opening-benchmark.github.io/",
+            "Homepage": "https://opening-benchmark.github.io/",
             "BibTex": "./files/papers/opening_arxiv_2024/opening.bib",
             "arXiv": "https://arxiv.org/abs/2411.18499"
         }
