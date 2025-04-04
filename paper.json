@@ -1,14 +1,14 @@
 [
     {
-        "title": "GATE OpenING: A Comprehensive Benchmark for Judging Open-ended Interleaved Image-Text Generation",
+        "title": "OpenING: A Comprehensive Benchmark for Judging Open-ended Interleaved Image-Text Generation",
         "author": ["Pengfei Zhou", "Xiaopeng Peng", "Jiajun Song", "Chuanhao Li", "Zhaopan Xu", "Yue Yang", "Ziyao Guo", "Hao Zhang", "Yuqi Lin", "Yefei He", "Lirui Zhao", "Shuo Liu", "Tianhua Li", "Yuxuan Xie", "Xiaojun Chang", "Yu Qiao", "Wenqi Shao", "Kaipeng Zhang"],
-        "description": "GATE OpenING is a comprehensive benchmark for evaluating open-ended interleaved image-text generation models. It consists of 5,400 high-quality human-annotated instances across 56 real-world tasks. OpenING covers diverse daily scenarios such as travel guide, design, and brainstorming.",
+        "description": "OpenING is a comprehensive benchmark for evaluating open-ended interleaved image-text generation models. It consists of 5,400 high-quality human-annotated instances across 56 real-world tasks. OpenING covers diverse daily scenarios such as travel guide, design, and brainstorming.",
         "year": "2025",
         "publisher": "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
         "image": "./files/papers/opening_arxiv_2024/opening.jpg",
         "pdf": "./files/papers/opening_arxiv_2024/opening.pdf",
         "equal": false,
-        "oral": false,
+        "oral": true,
         "meta" :{
             "Homepage": "https://opening-benchmark.github.io/",
             "BibTex": "./files/papers/opening_arxiv_2024/opening.bib",
