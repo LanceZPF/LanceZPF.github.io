@@ -143,19 +143,5 @@
             "Poster": "./files/papers/rwmf_icpr_2020/poster.pdf",
             "Video": "https://www.bilibili.com/video/BV19M411k73f/"
         }
-    },
-    {
-        "title": "ZJUTCVR Team at ImageCLEFlifelog2019 Lifelog Moment Retrieval Task",
-        "author": ["Pengfei Zhou", "Cong Bai", "Jie Xia"],
-        "description": "We use several different methods to provide a flexible retrieval system based on the huge amounts of multi-modal dataset. The work proposes a supervised learning approach with high precision and two exploratory approaches. We reach the second rank with F1-measure@10=0.44 in the ImageCLEFlifelog 2019 evaluation system.",
-        "year": "2019",
-        "publisher": "CLEF (Working Notes)",
-        "image": "./files/papers/zjutcvr_clef_2019/zjutcvr.png",
-        "pdf": "./files/papers/zjutcvr_clef_2019/zjutcvr.pdf",
-        "equal": false,
-        "oral": false,
-        "meta" :{
-            "BibTex": "./files/papers/zjutcvr_clef_2019/zjutcvr.bib"
-        }
     }
 ]
