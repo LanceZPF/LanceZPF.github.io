@@ -1,0 +1,342 @@
+/* ===================================================
+   Philosophy: "Everything is Random"
+   =================================================== */
+
+:root {
+  --bg: #0a0a0a;
+  --text: #e0e0e0;
+  --text-muted: #666666;
+  --accent: hsl(200, 70%, 60%);          /* overridden by JS */
+  --accent-dim: hsla(200, 70%, 60%, 0.15);
+  --dice-face: #ffffff;
+  --font: 'JetBrains Mono', monospace;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+body {
+  overflow-x: hidden;
+  cursor: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+a:hover { opacity: 0.7; }
+
+/* ---- Background canvases ---- */
+#walk-canvas,
+#cursor-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+#cursor-canvas { z-index: 9999; }
+
+/* ---- Sections common ---- */
+section {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  letter-spacing: 0.03em;
+}
+.section-label-close {
+  margin-top: 32px;
+  margin-bottom: 0;
+}
+
+/* ==================== HERO ==================== */
+#hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  max-width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#dice-container {
+  width: 220px;
+  height: 220px;
+  margin-bottom: 40px;
+  cursor: grab;
+}
+#dice-container:active { cursor: grabbing; }
+#dice-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#hero-text h1 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.tagline {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.links a {
+  color: var(--accent);
+  transition: color 0.2s, opacity 0.2s;
+}
+
+#roll-btn {
+  margin-top: 28px;
+  background: none;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 11px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+  border-radius: 2px;
+}
+#roll-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ==================== RESEARCH KEYWORDS ==================== */
+#research {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+#keyword-cloud {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+.keyword {
+  position: absolute;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: default;
+  transition: color 0.25s, transform 0.25s;
+  white-space: nowrap;
+  user-select: none;
+}
+.keyword:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.keyword .kw-desc {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.keyword:hover .kw-desc {
+  opacity: 1;
+}
+
+/* size variants */
+.keyword.kw-lg { font-size: 20px; }
+.keyword.kw-md { font-size: 16px; }
+.keyword.kw-sm { font-size: 13px; }
+
+/* ==================== PUBLICATIONS ==================== */
+#publications {
+  padding-top: 40px;
+}
+
+.shuffle-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.paper-card {
+  border-left: 2px solid var(--accent);
+  padding: 14px 0 14px 18px;
+  margin-bottom: 20px;
+  transition: border-width 0.2s, padding-left 0.2s;
+}
+.paper-card:hover {
+  border-left-width: 4px;
+  padding-left: 16px;
+}
+
+.paper-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.paper-venue {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.paper-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+}
+
+.paper-meta {
+  margin-top: 6px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.paper-meta a {
+  color: var(--accent);
+  opacity: 0.7;
+}
+.paper-meta a:hover { opacity: 1; }
+
+/* ==================== LIFE RANDOM WALK ==================== */
+#life-walk {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+#life-svg-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+#life-svg-container svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ==================== QUOTE ==================== */
+#quote-section {
+  text-align: center;
+  padding: 60px 24px 40px;
+}
+
+#random-quote {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+#random-quote .quote-author {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px 24px 40px;
+}
+
+#reroll-btn {
+  background: none;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 12px;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+#reroll-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.footer-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* ==================== CUSTOM CURSOR ==================== */
+@media (pointer: fine) {
+  body { cursor: none; }
+}
+@media (pointer: coarse) {
+  body { cursor: auto; }
+  #cursor-canvas { display: none; }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 600px) {
+  section { padding: 50px 16px; }
+  #dice-container { width: 160px; height: 160px; }
+  #hero-text h1 { font-size: 18px; }
+  #keyword-cloud { height: 320px; }
+  .keyword.kw-lg { font-size: 17px; }
+  .links { gap: 10px; font-size: 12px; }
+}

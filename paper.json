@@ -16,6 +16,22 @@
         }
     },
     {
+        "title": "Neural-Driven Image Editing",
+        "author": ["Pengfei Zhou", "Jie Xia", "Xiaopeng Peng", "Wangbo Zhao", "Zilong Ye", "Zekai Li", "Suorong Yang", "Jiadong Pan", "Yuanxiang Chen", "Ziqiao Wang", "Kai Wang", "Qian Zheng", "Xiaojun Chang", "Gang Pan", "Shurong Dong", "Kaipeng Zhang", "Yang You"],
+        "description": "We present LoongX, a hands-free image editing approach driven by multimodal neurophysiological signals. LoongX utilizes diffusion models trained on 23,928 image editing pairs with synchronized EEG, fNIRS, PPG, and head motion signals. The cross-scale state space (CS3) module encodes modality-specific features, and the dynamic gated fusion (DGF) module aggregates them into a unified latent space aligned with edit semantics.",
+        "year": "2025",
+        "publisher": "Advances in Neural Information Processing Systems (NeurIPS)",
+        "image": "./files/papers/loongx_neurips_2025/loongx.png",
+        "pdf": "./files/papers/loongx_neurips_2025/loongx.pdf",
+        "equal": false,
+        "oral": false,
+        "meta" :{
+            "Homepage": "https://loongx1.github.io",
+            "BibTex": "./files/papers/loongx_neurips_2025/loongx.bib",
+            "arXiv": "https://arxiv.org/abs/2507.05397"
+        }
+    },
+    {
         "title": "FoodSky: A Food-oriented Large Language Model that Passes the Chef and Dietetic Examination",
         "author": ["Pengfei Zhou", "Weiqing Min", "Chaoran Fu", "Ying Jin", "Mingyu Huang", "Xiangyang Li", "Shuhuan Mei", "Shuqiang Jiang"],
         "description": "FoodSky is a domain-specific Large Language Model (LLM) that utilizes the FoodEarth corpus and proposed Topic-based Selective State Space Model (TS3M) and Hierarchical Topic Retrieval Augmented Generation (HTRAG) to excel in food-related tasks, notably outperforming general LLMs in chef and dietetic exams.",
