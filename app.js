@@ -575,11 +575,11 @@
 
     const events = [
       { year: 2020, label: "First pub", progress: 0.10 },
-      { year: 2021, label: "B.E. @ ZJUT", progress: 0.22 },
+      { year: 2021, label: "B.E. @ ZJUT", progress: 0.26 },
       { year: 2022, label: "Multiple papers", progress: 0.38 },
-      { year: 2024, label: "M.E. @ ICT-CAS", progress: 0.52 },
-      { year: 2025, label: "NUS PhD Enroll", progress: 0.60 },
-      { year: 2025.8, label: "CVPR Oral + NeurIPS", progress: 0.88 }
+      { year: 2024, label: "M.E. @ ICT-CAS", progress: 0.46 },
+      { year: 2025, label: "NUS PhD Enroll", progress: 0.55 },
+      { year: 2025.8, label: "CVPR Oral + NeurIPS + Cell Patterns", progress: 0.86 }
     ];
 
     const yearMin = 2018, yearMax = 2027;
@@ -632,7 +632,7 @@
     const futurePoints = [];
     for (let s = 0; s < 25; s++) {
       cx += (xScale(yearMax) - xScale(lastEv.year)) / 25;
-      cy += (Math.random() - 0.5) * 12;
+      cy += (Math.random() - 0.46) * 12;
       futurePoints.push({ x: cx, y: cy });
     }
 
