@@ -83,7 +83,7 @@
         "title": "Self-supervised Enhancement for Named Entity Disambiguation via Multimodal Graph Convolution",
         "author": ["Pengfei Zhou", "Kaining Ying", "Zhenhua Wang", "Dongyan Guo", "Cong Bai"],
         "description": "We present MMGraph, which uses multimodal graph convolution to aggregate visual and contextual language information for accurate entity disambiguation for short texts, and a self-supervised framework Simple Triplet (SimTri) that can learn useful representations in multimodal unlabeled data to enhance the effectiveness of NED models.",
-        "year": "2022",
+        "year": "2024",
         "publisher": "IEEE Transactions on Neural Networks and Learning Systems (TNNLS)",
         "image": "./files/papers/mmgraph_tnnls_2022/mmgraph.png",
         "pdf": "./files/papers/mmgraph_tnnls_2022/mmgraph.pdf",

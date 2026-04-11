@@ -488,7 +488,7 @@
     },
     {
       title: "Self-supervised Enhancement for Named Entity Disambiguation via Multimodal Graph Convolution",
-      venue: "IEEE TNNLS 2022",
+      venue: "IEEE TNNLS 2024",
       oral: false,
       meta: {
         GitHub: "https://github.com/LanceZPF/NNED_MMGraph",
@@ -574,12 +574,12 @@
     const padL = 50, padR = 40, padT = 40, padB = 50;
 
     const events = [
-      { year: 2019, label: "First pub", progress: 0.12 },
-      { year: 2020, label: "B.E. @ ZJUT", progress: 0.24 },
-      { year: 2022, label: "Multiple papers", progress: 0.42 },
-      { year: 2023, label: "M.E. @ ICT-CAS", progress: 0.56 },
-      { year: 2023.5, label: "NUS PhD Enroll", progress: 0.66 },
-      { year: 2025, label: "CVPR Oral + NeurIPS", progress: 0.88 }
+      { year: 2020, label: "First pub", progress: 0.10 },
+      { year: 2021, label: "B.E. @ ZJUT", progress: 0.22 },
+      { year: 2022, label: "Multiple papers", progress: 0.38 },
+      { year: 2024, label: "M.E. @ ICT-CAS", progress: 0.52 },
+      { year: 2025, label: "NUS PhD Enroll", progress: 0.60 },
+      { year: 2025.8, label: "CVPR Oral + NeurIPS", progress: 0.88 }
     ];
 
     const yearMin = 2018, yearMax = 2027;
@@ -660,7 +660,7 @@
 
     /* x-axis */
     svg += `<line x1="${padL}" y1="${H - padB}" x2="${W - padR}" y2="${H - padB}" stroke="#333" stroke-width="1"/>`;
-    for (let yr = 2016; yr <= 2026; yr += 2) {
+    for (let yr = 2018; yr <= 2026; yr += 2) {
       const x = xScale(yr);
       svg += `<line x1="${x}" y1="${H - padB}" x2="${x}" y2="${H - padB + 5}" stroke="#444" stroke-width="1"/>`;
       svg += `<text x="${x}" y="${H - padB + 20}" fill="#666" font-family="'JetBrains Mono',monospace" font-size="10" text-anchor="middle">${yr}</text>`;
