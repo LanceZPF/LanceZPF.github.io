@@ -700,7 +700,7 @@
 
   /* ---------- 7. RANDOM QUOTE ---------- */
   const quotes = [
-    { text: "God does not play dice with the universe.", author: "Albert Einstein" },
+    { text: "When fortune smiles, heaven and earth conspire to help; when luck departs, even heroes lose their freedom.", author: "Luo Yin" },
     { text: "Stop telling God what to do with his dice.", author: "Niels Bohr" },
     { text: "Life is a school of probability.", author: "Walter Bagehot" },
     { text: "Randomness is the true foundation of mathematics.", author: "Gregory Chaitin" },
