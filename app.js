@@ -10,6 +10,9 @@
      0. SHARED STATE
      ========================================================== */
 
+  /* ---- CONFIG: set to true to enable dice → Order mode transition ---- */
+  const ENABLE_ORDER_MODE = false;
+
   let _hue = Math.floor(Math.random() * 360);
   let _accent = `hsl(${_hue}, 70%, 60%)`;
   let _accentDim = `hsla(${_hue}, 70%, 60%, 0.15)`;
@@ -525,6 +528,17 @@
     rollDice(() => {
       setNewAccent();
       updateDiceTextures();
+      if (!ENABLE_ORDER_MODE) {
+        // Order disabled: just re-randomize Chaos
+        wCtx.clearRect(0, 0, walkCanvas.width, walkCanvas.height);
+        initWalkers();
+        trail = [];
+        renderChaosPapers();
+        placeKeywords();
+        buildLifePath();
+        showQuote();
+        return;
+      }
       if (currentMode === "chaos") {
         switchToOrder();
       } else {
