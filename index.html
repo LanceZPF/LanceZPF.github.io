@@ -3,66 +3,355 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pengfei Zhou -- Everything is Random</title>
+  <meta name="description" content="Pengfei Zhou — PhD @ NUS. Dual-mode academic portfolio: Chaos (random walk) and Order (structured). Everything is random." />
+  <meta property="og:title" content="Lance — Everything is random" />
+  <meta property="og:description" content="PhD @ NUS. Dual-mode academic portfolio. Everything is random." />
+  <meta property="og:type" content="website" />
+  <title>Lance — Everything is random</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 </head>
-<body>
+<body data-mode="chaos">
 
-  <!-- Random Walk background canvas -->
+  <!-- ============ SHARED LAYERS ============ -->
+
+  <!-- Random walk background canvas (Chaos mode) -->
   <canvas id="walk-canvas"></canvas>
 
-  <!-- Cursor trail canvas -->
+  <!-- Cursor trail canvas (Chaos mode) -->
   <canvas id="cursor-canvas"></canvas>
 
-  <!-- ==================== HERO ==================== -->
-  <section id="hero">
+  <!-- 3D Dice (shared, repositions between modes) -->
+  <div id="dice-anchor">
     <div id="dice-container"></div>
-    <div id="hero-text">
-      <h1>Pengfei Zhou</h1>
-      <p class="tagline">PhD @ NUS. Everything is random.</p>
-      <nav class="links">
-        <a href="mailto:zpf4wp@outlook.com">[email]</a>
-        <a href="./files/about/CV_Lance_PengfeiZHOU.pdf" target="_blank">[cv]</a>
-        <a href="https://scholar.google.com/citations?hl=en&user=FLKP0NsAAAAJ" target="_blank">[scholar]</a>
-        <a href="https://github.com/LanceZPF" target="_blank">[github]</a>
-      </nav>
-      <button id="roll-btn" aria-label="Roll dice">// click dice or press space to re-roll</button>
+  </div>
+
+  <!-- Mode label toggle (top-right) -->
+  <div id="mode-label">
+    <span id="mode-label-chaos" class="mode-word active">CHAOS</span>
+    <span class="mode-slash">/</span>
+    <span id="mode-label-order" class="mode-word">ORDER</span>
+  </div>
+
+  <!-- ============ CHAOS MODE ============ -->
+  <div id="chaos-layer" class="mode-layer active">
+
+    <!-- Hero -->
+    <section id="chaos-hero">
+      <div id="chaos-hero-spacer"></div>
+      <div id="hero-text">
+        <h1>Pengfei Zhou</h1>
+        <p class="tagline">PhD @ NUS. Everything is random.</p>
+        <nav class="links">
+          <a href="mailto:zpf4wp@outlook.com">[email]</a>
+          <a href="./files/about/CV_Lance_PengfeiZHOU.pdf" target="_blank">[cv]</a>
+          <a href="https://scholar.google.com/citations?hl=en&user=FLKP0NsAAAAJ" target="_blank">[scholar]</a>
+          <a href="https://github.com/LanceZPF" target="_blank">[github]</a>
+        </nav>
+        <button id="roll-btn" aria-label="Roll dice">// click dice or press space to shift phase</button>
+      </div>
+    </section>
+
+    <!-- Research keywords -->
+    <section id="research">
+      <h2 class="section-label">research := {</h2>
+      <div id="keyword-cloud"></div>
+      <h2 class="section-label section-label-close">}</h2>
+    </section>
+
+    <!-- Publications (shuffled) -->
+    <section id="publications">
+      <p class="shuffle-note">// papers are randomly ordered. refresh for a different perspective.</p>
+      <div id="paper-list"></div>
+    </section>
+
+    <!-- Life random walk -->
+    <section id="life-walk">
+      <h2 class="section-label">life_as_random_walk()</h2>
+      <div id="life-svg-container"></div>
+    </section>
+
+    <!-- Quote -->
+    <section id="quote-section">
+      <blockquote id="random-quote"></blockquote>
+    </section>
+
+    <footer id="chaos-footer">
+      <p class="footer-note">seed = <span id="seed-val"></span></p>
+    </footer>
+  </div>
+
+  <!-- ============ ORDER MODE (Full LanceHub) ============ -->
+  <div id="order-layer" class="mode-layer">
+
+    <!-- Loading overlay (easter egg) -->
+    <div class="lh-loading-overlay" id="loadingOverlay">
+      <div class="lh-loading-spinner"></div>
+      <div class="lh-loading-text">Verifying your identity...</div>
     </div>
-  </section>
 
-  <!-- ==================== RESEARCH ==================== -->
-  <section id="research">
-    <h2 class="section-label">research := {</h2>
-    <div id="keyword-cloud"></div>
-    <h2 class="section-label section-label-close">}</h2>
-  </section>
+    <!-- Food rain container -->
+    <div class="lh-food-rain" id="foodRain"></div>
 
-  <!-- ==================== PUBLICATIONS ==================== -->
-  <section id="publications">
-    <p class="shuffle-note">// papers are randomly ordered. refresh for a different perspective.</p>
-    <div id="paper-list"></div>
-  </section>
+    <!-- Contribution tooltip -->
+    <div class="lh-contrib-tooltip" id="contribTooltip"></div>
 
-  <!-- ==================== LIFE RANDOM WALK ==================== -->
-  <section id="life-walk">
-    <h2 class="section-label">life_as_random_walk()</h2>
-    <div id="life-svg-container"></div>
-  </section>
+    <!-- Top Navigation -->
+    <nav class="lh-top-nav">
+      <a class="lh-nav-logo" id="navLogo" href="#">
+        <span class="lh-logo-lance">Lance</span><span class="lh-logo-hub">Hub</span>
+      </a>
 
-  <!-- ==================== QUOTE ==================== -->
-  <section id="quote-section">
-    <blockquote id="random-quote"></blockquote>
-  </section>
+      <div class="lh-nav-search">
+        <span class="lh-search-icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="Search papers, projects, keywords...">
+        <span class="lh-search-results-count" id="searchCount"></span>
+      </div>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer>
-    <button id="reroll-btn">[ re-roll ]</button>
-    <p class="footer-note">seed = <span id="seed-val"></span></p>
-  </footer>
+      <div class="lh-nav-spacer"></div>
+    </nav>
+
+    <!-- Category Tabs -->
+    <div class="lh-category-tabs">
+      <button class="lh-tab-btn active" data-tab="all">
+        &#127968; Overview
+      </button>
+      <button class="lh-tab-btn" data-tab="publications">
+        &#128214; Publications <span class="lh-tab-count" id="pubCount">20+</span>
+      </button>
+      <button class="lh-tab-btn" data-tab="code">
+        &#128187; Code <span class="lh-tab-count">9</span>
+      </button>
+      <button class="lh-tab-btn" data-tab="reviews">
+        &#128065; Reviews <span class="lh-tab-count">12+</span>
+      </button>
+      <button class="lh-tab-btn" data-tab="internships">
+        &#128188; Internships <span class="lh-tab-count">1</span>
+      </button>
+      <button class="lh-tab-btn" data-tab="about">
+        &#128100; About
+      </button>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="lh-main-container">
+
+      <!-- Profile Sidebar -->
+      <aside class="lh-profile-sidebar">
+        <img src="./files/about/LanceZhou_circle.jpg" alt="Pengfei Zhou" class="lh-profile-avatar">
+        <div>
+          <div class="lh-profile-name">Pengfei Zhou</div>
+          <div class="lh-profile-handle">@LanceZPF</div>
+        </div>
+        <p class="lh-profile-bio">
+          PhD Student in Computer Science. Researching multimodal AI, vision-language models, and food computing.
+        </p>
+
+        <ul class="lh-profile-details">
+          <li>&#127891; National University of Singapore</li>
+          <li>&#128205; Singapore</li>
+          <li>&#128101; Advised by Prof. Yang You</li>
+          <li><a href="mailto:zpf4wp@outlook.com">&#128231; zpf4wp@outlook.com</a></li>
+          <li><a href="https://scholar.google.com/citations?hl=en&user=FLKP0NsAAAAJ" target="_blank">&#128218; Google Scholar</a></li>
+          <li><a href="https://github.com/LanceZPF" target="_blank">&#128736; GitHub</a></li>
+        </ul>
+
+        <div class="lh-profile-stats">
+          <strong>20+</strong>&nbsp;publications
+          <span class="lh-stat-sep">&middot;</span>
+          <strong>10+</strong>&nbsp;reviews
+          <span class="lh-stat-sep">&middot;</span>
+          <strong>9</strong>&nbsp;repos
+        </div>
+
+        <!-- Achievements -->
+        <div class="lh-sidebar-section">
+          <h3>&#127942; Achievements</h3>
+          <div class="lh-achievements">
+            <div class="lh-achievement-badge">
+              <span class="lh-achievement-icon" style="background:#ff9000;">&#9733;</span>
+              CVPR 2025 Oral
+            </div>
+            <div class="lh-achievement-badge">
+              <span class="lh-achievement-icon" style="background:#58a6ff;">&#9733;</span>
+              Cell Patterns 2025
+            </div>
+            <div class="lh-achievement-badge">
+              <span class="lh-achievement-icon" style="background:#ffd700;">&#127941;</span>
+              National Scholarship &times;2
+            </div>
+            <div class="lh-achievement-badge">
+              <span class="lh-achievement-icon" style="background:#39d353;">&#127891;</span>
+              Outstanding Graduate (Beijing &amp; Zhejiang)
+            </div>
+            <div class="lh-achievement-badge">
+              <span class="lh-achievement-icon" style="background:#c0c0c0;">&#129352;</span>
+              2nd @ ImageCLEF 2019 LMRT
+            </div>
+          </div>
+        </div>
+
+        <!-- Organizations -->
+        <div class="lh-sidebar-section">
+          <h3>Organizations</h3>
+          <div class="lh-org-list">
+            <span class="lh-org-badge" title="National University of Singapore">NUS</span>
+            <span class="lh-org-badge" title="Institute of Computing Technology, CAS">ICT</span>
+            <span class="lh-org-badge" title="Zhejiang University of Technology">ZJUT</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Content Area -->
+      <main class="lh-content-area">
+
+        <!-- Premium banner (easter egg) -->
+        <div class="lh-premium-banner" id="premiumBanner">
+          &#11088; Upgrade to <strong>LanceHub Premium</strong> for exclusive research insights! &#11088;
+        </div>
+
+        <!-- Overview tab -->
+        <div class="lh-tab-section active" id="sec-all">
+          <div class="lh-section-heading">
+            <span class="lh-pin-icon">&#128204;</span> Pinned Publications
+          </div>
+          <div class="lh-pinned-grid" id="paperGrid"></div>
+          <div class="lh-no-results" id="noResults">
+            No papers matching your search. Try different keywords.
+          </div>
+
+          <!-- Contribution Graph -->
+          <div class="lh-contrib-section">
+            <div class="lh-section-heading">
+              &#128200; Contribution Graph
+            </div>
+            <div class="lh-contrib-graph-wrap">
+              <h3 id="contribYearLabel"></h3>
+              <div id="contribGraph"></div>
+              <p class="lh-contrib-summary" id="contribSummary"></p>
+              <div class="lh-contrib-legend">
+                Less
+                <span class="lh-legend-cell" style="background:#161b22;border:1px solid #30363d;"></span>
+                <span class="lh-legend-cell" style="background:#0e4429;"></span>
+                <span class="lh-legend-cell" style="background:#006d32;"></span>
+                <span class="lh-legend-cell" style="background:#26a641;"></span>
+                <span class="lh-legend-cell" style="background:#39d353;"></span>
+                More
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Timeline -->
+          <div class="lh-timeline-section">
+            <div class="lh-section-heading">
+              &#128197; Contribution Activity
+            </div>
+            <div class="lh-timeline" id="timeline"></div>
+          </div>
+        </div>
+
+        <!-- Publications tab -->
+        <div class="lh-tab-section" id="sec-publications">
+          <div class="lh-section-heading"><span class="lh-pin-icon">&#128214;</span> Representative Publications</div>
+          <div class="lh-pinned-grid" id="paperGridPub"></div>
+        </div>
+
+        <!-- Code tab -->
+        <div class="lh-tab-section" id="sec-code">
+          <div class="lh-section-heading"><span class="lh-pin-icon">&#128187;</span> Open-Source Repositories</div>
+          <div class="lh-pinned-grid" id="codeGrid"></div>
+        </div>
+
+        <!-- Reviews tab -->
+        <div class="lh-tab-section" id="sec-reviews">
+          <div class="lh-section-heading"><span class="lh-pin-icon">&#128065;</span> Reviewer Service</div>
+          <h3 style="font-size:15px;margin-bottom:12px;color:#8b949e;">Conference Reviewing</h3>
+          <div class="lh-review-cards" style="margin-bottom:20px;">
+            <div class="lh-review-card"><div class="lh-venue-name">CVPR 2026</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">ECCV 2026</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">AAAI 2026</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">NeurIPS 2025</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">NeurIPS 2024</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">ICML 2025</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">ICLR 2024</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">ACM MM 2025</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">ACM MM 2024</div><div class="lh-venue-type">Conference</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">ACM MM 2023</div><div class="lh-venue-type">Conference</div></div>
+          </div>
+          <h3 style="font-size:15px;margin-bottom:12px;color:#8b949e;">Journal Reviewing</h3>
+          <div class="lh-review-cards">
+            <div class="lh-review-card"><div class="lh-venue-name">IEEE TNNLS</div><div class="lh-venue-type">Journal</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">IEEE TMM</div><div class="lh-venue-type">Journal</div></div>
+            <div class="lh-review-card"><div class="lh-venue-name">IEEE TYCB</div><div class="lh-venue-type">Journal</div></div>
+          </div>
+        </div>
+
+        <!-- Internships tab -->
+        <div class="lh-tab-section" id="sec-internships">
+          <div class="lh-section-heading"><span class="lh-pin-icon">&#128188;</span> Internship Experience</div>
+          <div class="lh-internship-cards">
+            <div class="lh-internship-card">
+              <div class="lh-internship-logo" style="background:#4c6ef5;">&#127981;</div>
+              <div class="lh-internship-info">
+                <div class="lh-internship-title">Research Intern</div>
+                <div class="lh-internship-company"><a href="https://www.shlab.org.cn/" target="_blank">Shanghai AI Laboratory</a></div>
+                <div class="lh-internship-detail">Worked with <a href="https://kpzhang93.github.io/" target="_blank">Kaipeng Zhang</a> on multimodal intelligence and open-ended interleaved image-text generation.</div>
+                <div class="lh-internship-tags">
+                  <span class="lh-paper-tag">multimodal</span>
+                  <span class="lh-paper-tag">interleaved-generation</span>
+                  <span class="lh-paper-tag">LLM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About tab -->
+        <div class="lh-tab-section" id="sec-about">
+          <div class="lh-about-section">
+            <h2>About Pengfei Zhou</h2>
+            <p>I am a PhD student in Computer Science at the <strong>National University of Singapore (NUS)</strong>, advised by <strong>Prof. Yang You</strong>. I obtained my M.E. from the <strong>Institute of Computing Technology, Chinese Academy of Sciences (ICT-CAS)</strong>, and my B.E. from <strong>Zhejiang University of Technology (ZJUT)</strong>.</p>
+
+            <h3>Research Interests</h3>
+            <ul>
+              <li>Multimodal Learning &amp; Vision-Language Models</li>
+              <li>Food Computing &amp; Healthcare Applications</li>
+              <li>Zero-shot Detection &amp; Recognition</li>
+              <li>Brain-Computer Interface for Generative Tasks</li>
+              <li>LLMs & Agents & Agentic World Models</li>
+            </ul>
+
+            <h3>Education</h3>
+            <ul>
+              <li><strong>PhD</strong> &mdash; National University of Singapore (NUS), ongoing</li>
+              <li><strong>M.E.</strong> &mdash; Institute of Computing Technology, Chinese Academy of Sciences</li>
+              <li><strong>B.E.</strong> &mdash; Zhejiang University of Technology</li>
+            </ul>
+
+            <h3>Contact</h3>
+            <p>Email: <a href="mailto:zpf4wp@outlook.com">zpf4wp@outlook.com</a> &bull; <a href="https://github.com/LanceZPF" target="_blank">GitHub</a> &bull; <a href="https://scholar.google.com/citations?hl=en&user=FLKP0NsAAAAJ" target="_blank">Google Scholar</a></p>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="lh-site-footer">
+      <div>LanceHub &copy; <script>document.write(new Date().getFullYear())</script></div>
+      <div class="lh-footer-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Security</a>
+        <span style="margin-left:16px;">
+          <a href="zh.html" class="lh-footer-zh">中文</a>
+        </span>
+      </div>
+    </footer>
+  </div>
 
   <script src="app.js"></script>
 </body>

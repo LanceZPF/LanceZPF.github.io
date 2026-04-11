@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小周驿站 · LanceHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --warm-bg: #faf6f0;
+      --warm-text: #3d3529;
+      --warm-accent: #c9784d;
+      --warm-border: #e0d5c5;
+      --warm-muted: #8a7e6e;
+      --warm-card: #f3ede4;
+    }
+
+    body {
+      font-family: 'Noto Serif SC', 'Songti SC', serif;
+      background: var(--warm-bg);
+      color: var(--warm-text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Title */
+    .zh-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--warm-accent);
+      margin-bottom: 6px;
+      letter-spacing: 2px;
+    }
+
+    .zh-subtitle {
+      font-size: 14px;
+      color: var(--warm-muted);
+      margin-bottom: 36px;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* Decorative line */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--warm-accent);
+      margin: 0 auto 32px;
+      border-radius: 1px;
+    }
+
+    /* Photo */
+    .zh-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--warm-border);
+      object-fit: cover;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    /* Name & affiliation */
+    .zh-name {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .zh-affiliation {
+      font-size: 15px;
+      color: var(--warm-muted);
+      margin-bottom: 4px;
+    }
+
+    .zh-advisor {
+      font-size: 14px;
+      color: var(--warm-muted);
+      margin-bottom: 28px;
+    }
+
+    /* Sections */
+    .zh-section {
+      text-align: left;
+      margin-bottom: 28px;
+      padding: 0 8px;
+    }
+
+    .zh-section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--warm-accent);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--warm-border);
+    }
+
+    .zh-research-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-start;
+    }
+
+    .zh-tag {
+      font-size: 13px;
+      padding: 4px 12px;
+      border: 1px solid var(--warm-border);
+      border-radius: 16px;
+      background: var(--warm-card);
+      color: var(--warm-text);
+    }
+
+    /* Paper list */
+    .zh-paper-list {
+      list-style: none;
+    }
+
+    .zh-paper-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--warm-border);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .zh-paper-list li:last-child { border-bottom: none; }
+
+    .zh-paper-title {
+      font-weight: 600;
+      color: var(--warm-text);
+    }
+
+    .zh-paper-venue {
+      font-size: 13px;
+      color: var(--warm-accent);
+      font-weight: 600;
+    }
+
+    .zh-paper-badge {
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 6px;
+      background: var(--warm-accent);
+      color: #fff;
+      margin-left: 4px;
+    }
+
+    /* Contact */
+    .zh-contact {
+      font-size: 14px;
+      line-height: 2;
+      text-align: left;
+    }
+
+    .zh-contact a {
+      color: var(--warm-accent);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--warm-accent);
+    }
+
+    .zh-contact a:hover {
+      color: #a05c30;
+    }
+
+    /* Quote */
+    .zh-quote {
+      margin-top: 36px;
+      padding: 20px;
+      background: var(--warm-card);
+      border-radius: 8px;
+      border-left: 3px solid var(--warm-accent);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--warm-muted);
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    /* Back link */
+    .zh-back {
+      margin-top: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--warm-accent);
+      text-decoration: none;
+      padding: 8px 20px;
+      border: 1px solid var(--warm-border);
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .zh-back:hover {
+      background: var(--warm-accent);
+      color: #fff;
+      border-color: var(--warm-accent);
+    }
+
+    /* Footer */
+    .zh-footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--warm-muted);
+    }
+
+    @media (max-width: 600px) {
+      .zh-title { font-size: 22px; }
+      .zh-name { font-size: 22px; }
+      .zh-photo { width: 110px; height: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="zh-title">小周驿站</div>
+    <div class="zh-subtitle">LanceHub</div>
+
+    <div class="divider"></div>
+
+    <img src="./files/about/LanceZhou_circle.jpg" alt="周鹏飞" class="zh-photo">
+
+    <div class="zh-name">周鹏飞</div>
+    <div class="zh-affiliation">新加坡国立大学 计算机科学 博士在读</div>
+    <div class="zh-advisor">导师：Prof. Yang You</div>
+
+    <!-- Research -->
+    <div class="zh-section">
+      <div class="zh-section-title">研究方向</div>
+      <div class="zh-research-tags">
+        <span class="zh-tag">多模态智能</span>
+        <span class="zh-tag">视觉-语言模型</span>
+        <span class="zh-tag">多媒体信息处理</span>
+        <span class="zh-tag">食品计算</span>
+        <span class="zh-tag">脑机接口</span>
+      </div>
+    </div>
+
+    <!-- Papers -->
+    <div class="zh-section">
+      <div class="zh-section-title">代表作</div>
+      <ul class="zh-paper-list">
+        <li>
+          <div class="zh-paper-title">OpenING: A Comprehensive Benchmark for Judging Open-ended Interleaved Image-Text Generation</div>
+          <span class="zh-paper-venue">CVPR 2025</span>
+          <span class="zh-paper-badge">Oral</span>
+        </li>
+        <li>
+          <div class="zh-paper-title">Neural-Driven Image Editing (LoongX)</div>
+          <span class="zh-paper-venue">NeurIPS 2025</span>
+        </li>
+        <li>
+          <div class="zh-paper-title">FoodSky: A Food-oriented Large Language Model that Passes the Chef and Dietetic Examination</div>
+          <span class="zh-paper-venue">Patterns (Cell Press) 2025</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="zh-section">
+      <div class="zh-section-title">联系方式</div>
+      <div class="zh-contact">
+        &#128231; 邮箱：<a href="mailto:zpf4wp@outlook.com">zpf4wp@outlook.com</a><br>
+        &#127760; 主页：<a href="https://LanceZPF.github.io" target="_blank">LanceZPF.github.io</a><br>
+        &#128218; 谷歌学术：<a href="https://scholar.google.com/citations?hl=en&user=FLKP0NsAAAAJ" target="_blank">Scholar Profile</a>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="zh-quote">
+      "感谢每一位出现在我生命中的人，这里属于我，也属于你们。"
+    </div>
+
+    <!-- Back -->
+    <a href="index.html" class="zh-back">&#8592; Back to Dice</a>
+
+    <div class="zh-footer">
+      小周驿站 &copy; <script>document.write(new Date().getFullYear())</script>
+    </div>
+
+  </div>
+
+</body>
+</html>
