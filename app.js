@@ -160,28 +160,16 @@
       date: "2022-05-01"
     },
     {
-      title: "DRAN",
-      fullTitle: "Exploring Implicit and Explicit Relations with the Dual Relation-Aware Network for Image Captioning",
-      desc: "Dual Relation-Aware Network with dual-path relation encoder and adaptive context relation decoder for image captioning.",
-      venue: "MMM 2022", year: 2022, oral: false,
-      venueColor: "#d29922",
-      tags: ["image-captioning", "relation-aware"],
-      stars: 10, forks: 2,
-      links: { Springer: "https://link.springer.com/chapter/10.1007/978-3-030-98355-0_9", PDF: "./files/papers/dran_mmm_2022/dran.pdf" },
-      github: "https://github.com/Zjut-MultimediaPlus/DRAN",
-      date: "2022-01-01"
-    },
-    {
-      title: "RWMF",
-      fullTitle: "RWMF: A Real-World Multimodal Foodlog Database",
-      desc: "A real-world foodlog database built from lifelog and medical data using filters, clusters, and graph convolutional networks.",
-      venue: "ICPR 2020", year: 2020, oral: false,
-      venueColor: "#d29922",
-      tags: ["food-computing", "dataset", "lifelog"],
-      stars: 8, forks: 2,
-      links: { DataPort: "https://ieee-dataport.org/open-access/rwmf-real-world-multimodal-foodlog-database" },
-      github: null,
-      date: "2020-12-01"
+      title: "MDK12-Bench",
+      fullTitle: "MDK12-Bench: A Multi-Discipline Benchmark for Evaluating Reasoning in Multimodal Large Language Models",
+      desc: "A multi-discipline benchmark for evaluating reasoning in multimodal large language models across K-12 subjects.",
+      venue: "AAAI 2026", year: 2026, oral: false,
+      venueColor: "#3fb950",
+      tags: ["benchmark", "multimodal", "reasoning", "MLLM"],
+      stars: 13, forks: 0,
+      links: { AAAI: "https://ojs.aaai.org/index.php/AAAI/article/view/40134" },
+      github: "https://github.com/LanceZPF/MDK12",
+      date: "2025-11-08"
     }
   ];
 
@@ -200,8 +188,7 @@
     "MMGraph":  "&#128296;",
     "CMRDF":    "&#9201;",
     "ISDA":     "&#129529;",
-    "DRAN":     "&#128172;",
-    "RWMF":     "&#128218;"
+    "MDK12-Bench": "&#127891;"
   };
 
   /* Activity events for LanceHub timeline & contribution graph */
@@ -223,7 +210,7 @@
     { type: "published", text: 'Published <a>SeeDS</a> in <strong>ACM MM 2023</strong>', date: "2023-10-01", note: null },
     { type: "published", text: 'Published <a>MMGraph</a> in <strong>IEEE TNNLS</strong>', date: "2022-06-01", note: null },
     { type: "published", text: 'Published <a>ISDA</a> in <strong>ICASSP 2022</strong>', date: "2022-05-01", note: "Oral presentation" },
-    { type: "published", text: 'Published <a>RWMF</a> in <strong>ICPR 2020</strong>', date: "2020-12-01", note: null }
+    { type: "published", text: 'Published <a>MDK12-Bench</a> at <strong>AAAI 2026</strong>', date: "2025-11-08", note: null }
   ];
 
   /* ==========================================================
@@ -550,6 +537,7 @@
   function switchToOrder() {
     currentMode = "order";
     document.body.setAttribute("data-mode", "order");
+    document.body.classList.remove("chaos-scrolled");
     document.getElementById("chaos-layer").classList.remove("active");
     document.getElementById("order-layer").classList.add("active");
     window.scrollTo(0, 0);
@@ -560,6 +548,7 @@
   function switchToChaos() {
     currentMode = "chaos";
     document.body.setAttribute("data-mode", "chaos");
+    document.body.classList.remove("chaos-scrolled");
     document.getElementById("order-layer").classList.remove("active");
     document.getElementById("chaos-layer").classList.add("active");
     window.scrollTo(0, 0);
@@ -698,9 +687,9 @@
     const padL = 50, padR = 40, padT = 40, padB = 50;
 
     const events = [
-      { year: 2020, label: "First pub", progress: 0.10 },
+      { year: 2020, label: "First Pub", progress: 0.10 },
       { year: 2021, label: "B.E. @ ZJUT", progress: 0.26 },
-      { year: 2022, label: "Multiple papers", progress: 0.38 },
+      { year: 2022, label: "Multiple Papers", progress: 0.38 },
       { year: 2024, label: "M.E. @ ICT-CAS", progress: 0.46 },
       { year: 2025, label: "NUS PhD Enroll", progress: 0.55 },
       { year: 2025.8, label: "CVPR Oral + NeurIPS + Cell Patterns", progress: 0.86 },
@@ -714,15 +703,16 @@
     let pathPoints = [];
     const firstX = xScale(events[0].year);
     const firstY = yScale(events[0].progress);
-    const leadPoints = [];
-    let lx = firstX, ly = firstY;
-    for (let s = 15; s >= 1; s--) {
-      lx = padL + (firstX - padL) * (s / 15);
-      ly = firstY + (Math.random() - 0.5) * 14 + (s / 15) * 20;
-      leadPoints.push({ x: lx, y: ly });
+    /* Upward lead-in: start near zero progress at left edge, rise smoothly to first event */
+    const leadStartY = yScale(0);
+    const leadSteps = 18;
+    for (let s = 0; s < leadSteps; s++) {
+      const t = s / leadSteps;
+      const ease = Math.pow(t, 1.4);
+      const lx = padL + (firstX - padL) * t;
+      const ly = leadStartY + (firstY - leadStartY) * ease + (Math.random() - 0.5) * 6;
+      pathPoints.push({ x: lx, y: ly });
     }
-    leadPoints.reverse();
-    pathPoints.push(...leadPoints);
     pathPoints.push({ x: firstX, y: firstY });
 
     for (let i = 1; i < events.length; i++) {
@@ -848,8 +838,8 @@
     const ghLink = p.github ? `<a href="${p.github}" target="_blank" class="lh-meta-link">&#128187; Code</a>` : "";
     const oralBadge = p.oral ? '<span class="lh-badge-oral">Oral</span>' : "";
     const icon = paperIcons[p.title] || "&#128196;";
-    // Default link: arXiv > Homepage > IEEE > Springer > first link > #
-    const defaultLink = p.links.arXiv || p.links.Homepage || p.links.IEEE || p.links.Springer || (linkEntries.length ? linkEntries[0][1] : "#");
+    // Default link: arXiv > Homepage > AAAI > IEEE > Springer > first link > #
+    const defaultLink = p.links.arXiv || p.links.Homepage || p.links.AAAI || p.links.IEEE || p.links.Springer || (linkEntries.length ? linkEntries[0][1] : "#");
 
     return `
       <div class="lh-paper-card" data-searchable="${(p.fullTitle + " " + p.title + " " + p.desc + " " + p.venue + " " + p.tags.join(" ") + " " + p.year).toLowerCase()}">
@@ -1282,6 +1272,18 @@
 
   /* Pre-render Order mode content so it's ready before first switch (prevents black screen) */
   initOrderMode();
+
+  /* ==========================================================
+     SCROLL: shrink Chaos dice to top when scrolled past hero
+     ========================================================== */
+  const SCROLL_THRESHOLD = 160;
+  function onChaosScroll() {
+    if (currentMode !== "chaos") return;
+    const scrolled = window.scrollY > SCROLL_THRESHOLD;
+    document.body.classList.toggle("chaos-scrolled", scrolled);
+  }
+  window.addEventListener("scroll", onChaosScroll, { passive: true });
+  onChaosScroll();
 
   let zhBuffer = "";
   let zhTimer = null;

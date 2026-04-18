@@ -115,13 +115,22 @@ a:hover { opacity: 0.7; }
               transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Chaos: large centered */
+/* Chaos: large centered in hero by default */
 body[data-mode="chaos"] #dice-anchor {
   top: 50%;
   left: 50%;
   width: 200px;
   height: 200px;
   transform: translate(-50%, -50%) translateY(-100px);
+}
+
+/* Chaos + scrolled past hero: shrink and stick to top */
+body[data-mode="chaos"].chaos-scrolled #dice-anchor {
+  top: 20px;
+  left: 50%;
+  width: 90px;
+  height: 90px;
+  transform: translate(-50%, 0);
 }
 
 /* Order: small top-left with hover glow */
@@ -293,6 +302,11 @@ body[data-mode="chaos"] { cursor: none; }
 
 #chaos-hero-spacer {
   height: 260px;
+}
+
+#hero-text {
+  position: relative;
+  z-index: 600; /* above dice (500) so email / links always clickable even if overlap */
 }
 
 #hero-text h1 {
@@ -1289,6 +1303,11 @@ body[data-mode="chaos"] { cursor: none; }
   body[data-mode="chaos"] #dice-anchor {
     width: 160px;
     height: 160px;
+  }
+  body[data-mode="chaos"].chaos-scrolled #dice-anchor {
+    width: 72px;
+    height: 72px;
+    top: 14px;
   }
 }
 
