@@ -69,7 +69,7 @@
       desc: "A comprehensive benchmark with 5,400 human-annotated instances across 56 real-world tasks for evaluating open-ended interleaved image-text generation models.",
       venue: "CVPR 2025", year: 2025, oral: true,
       venueColor: "#3fb950",
-      tags: ["multimodal", "benchmark", "interleaved-generation"],
+      tags: ["multimodal", "benchmark", "unified model"],
       stars: 58, forks: 14,
       links: { Homepage: "https://opening-benchmark.github.io/", arXiv: "https://arxiv.org/abs/2411.18499" },
       github: null,
@@ -81,7 +81,7 @@
       desc: "A hands-free image editing approach driven by multimodal neurophysiological signals (EEG, fNIRS, PPG, head motion) using diffusion models.",
       venue: "NeurIPS 2025", year: 2025, oral: false,
       venueColor: "#bc8cff",
-      tags: ["brain-computer-interface", "diffusion-model", "image-editing"],
+      tags: ["brain-computer-interface", "diffusion model", "image editing"],
       stars: 35, forks: 8,
       links: { Homepage: "https://loongx1.github.io", arXiv: "https://arxiv.org/abs/2507.05397" },
       github: null,
@@ -93,7 +93,7 @@
       desc: "Domain-specific LLM using FoodEarth corpus and TS3M + HTRAG modules, outperforming general LLMs in chef and dietetic exams.",
       venue: "Patterns (Cell Press)", year: 2025, oral: false,
       venueColor: "#f778ba",
-      tags: ["food-ai", "LLM", "domain-specific"],
+      tags: ["food computing", "LLM", "domain research"],
       stars: 42, forks: 10,
       links: { Demo: "http://222.92.101.211:8200", arXiv: "https://arxiv.org/abs/2406.10261" },
       github: null,
@@ -105,7 +105,7 @@
       desc: "A framework leveraging multi-source graphs and KEFS for zero-shot food detection, introducing the FOWA dataset.",
       venue: "IEEE TIP", year: 2024, oral: false,
       venueColor: "#58a6ff",
-      tags: ["zero-shot", "food-detection", "knowledge-graph"],
+      tags: ["multimodal", "food computing", "object detection"],
       stars: 28, forks: 6,
       links: { arXiv: "https://arxiv.org/abs/2402.09242" },
       github: "https://github.com/LanceZPF/KEFS",
@@ -117,7 +117,7 @@
       desc: "Proposes the Zero-Shot Food Detection task with a Semantic Separable Synthesizing Module and Region Feature Denoising Diffusion Model.",
       venue: "ACM MM 2023", year: 2023, oral: false,
       venueColor: "#f0883e",
-      tags: ["zero-shot", "diffusion", "food-detection"],
+      tags: ["diffusion", "food computing", "object detection"],
       stars: 22, forks: 5,
       links: { arXiv: "https://arxiv.org/abs/2310.04689" },
       github: "https://github.com/LanceZPF/SeeDS",
@@ -129,7 +129,7 @@
       desc: "Multimodal graph convolution for entity disambiguation in short texts with a self-supervised SimTri framework.",
       venue: "IEEE TNNLS", year: 2024, oral: false,
       venueColor: "#58a6ff",
-      tags: ["NLP", "graph-convolution", "self-supervised"],
+      tags: ["multimodal", "graph convolution", "self-supervised"],
       stars: 18, forks: 4,
       links: { IEEE: "https://ieeexplore.ieee.org/document/9774860/", PDF: "./files/papers/mmgraph_tnnls_2022/mmgraph.pdf" },
       github: "https://github.com/LanceZPF/NNED_MMGraph",
@@ -141,7 +141,7 @@
       desc: "Cross-Modal Retrieval on Diabetogenic Food for real-time dietary monitoring via wearable devices.",
       venue: "IEEE IoTJ", year: 2022, oral: false,
       venueColor: "#58a6ff",
-      tags: ["IoT", "food-computing", "wearable"],
+      tags: ["multimodal", "AIoT", "food computing"],
       stars: 12, forks: 3,
       links: { IEEE: "https://ieeexplore.ieee.org/document/9097272/", PDF: "./files/papers/cmrdf_iotj_2022/cmrdf.pdf" },
       github: "https://github.com/LanceZPF/CMRDF",
@@ -153,7 +153,7 @@
       desc: "End-to-end Transformer-based instance segmentation achieving 38.7 mAP on MS COCO with ResNet-50.",
       venue: "ICASSP 2022", year: 2022, oral: true,
       venueColor: "#d29922",
-      tags: ["segmentation", "transformer", "deformable-attention"],
+      tags: ["instance segmentation", "transformer", "deformable-attention"],
       stars: 15, forks: 4,
       links: { arXiv: "https://arxiv.org/abs/2202.12251" },
       github: "https://github.com/yingkaining/isda",
@@ -165,7 +165,7 @@
       desc: "A multi-discipline benchmark for evaluating reasoning in multimodal large language models across K-12 subjects.",
       venue: "AAAI 2026", year: 2026, oral: false,
       venueColor: "#3fb950",
-      tags: ["benchmark", "multimodal", "reasoning", "MLLM"],
+      tags: ["benchmark", "multimodal", "MLLM"],
       stars: 13, forks: 0,
       links: { AAAI: "https://ojs.aaai.org/index.php/AAAI/article/view/40134" },
       github: "https://github.com/LanceZPF/MDK12",
@@ -831,6 +831,26 @@
   }
 
   /* ---- Render LanceHub paper cards ---- */
+  const TAG_ACRONYMS = new Map([
+    ["ai", "AI"],
+    ["aiot", "AIoT"],
+    ["bci", "BCI"],
+    ["iot", "IoT"],
+    ["llm", "LLM"],
+    ["mllm", "MLLM"],
+    ["nlp", "NLP"],
+    ["rlvr", "RLVR"]
+  ]);
+
+  function formatTagLabel(tag) {
+    return String(tag).split(/([-\s]+)/).map(part => {
+      if (/^[-\s]+$/.test(part)) return part;
+      const lower = part.toLowerCase();
+      if (TAG_ACRONYMS.has(lower)) return TAG_ACRONYMS.get(lower);
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+    }).join("");
+  }
+
   function renderLanceHubPaperCard(p) {
     const linkEntries = Object.entries(p.links);
     const metaLinks = linkEntries.map(([k, v]) => `<a href="${v}" target="_blank" class="lh-meta-link">${k}</a>`).join(" ");
@@ -847,7 +867,7 @@
           <a href="${defaultLink}" target="_blank" class="lh-paper-title">${p.title}</a>
         </div>
         <div class="lh-paper-desc">${p.desc}</div>
-        <div class="lh-paper-tags">${p.tags.map(t => `<span class="lh-paper-tag">${t}</span>`).join("")}</div>
+        <div class="lh-paper-tags">${p.tags.map(t => `<span class="lh-paper-tag">${formatTagLabel(t)}</span>`).join("")}</div>
         <div class="lh-paper-meta-row">
           <span><span class="lh-venue-dot" style="background:${p.venueColor}"></span>${p.venue}</span>
           ${oralBadge}
@@ -860,14 +880,14 @@
   /* ---- Standalone repos (Code tab) ---- */
   const repos = [
     { name: "EvalHall", desc: "Evaluation framework for hallucination detection in multimodal models.", url: "https://github.com/LanceZPF/EvalHall", tags: ["evaluation", "hallucination", "multimodal"], stars: "1+", forks: "0+" },
-    { name: "MDK12", desc: "A comprehensive benchmark for evaluating multimodal document understanding across K-12 educational levels.", url: "https://github.com/LanceZPF/MDK12", tags: ["benchmark", "multimodal", "document"], stars: "13+", forks: "0+" },
-    { name: "OpenING", desc: "Benchmark for open-ended interleaved image-text generation evaluation.", url: "https://github.com/LanceZPF/OpenING", tags: ["benchmark", "interleaved-generation"], stars: "40+", forks: "0+" },
-    { name: "LoongX", desc: "Neural-driven image editing via multimodal neurophysiological signals.", url: "https://github.com/LanceZPF/loongx", tags: ["BCI", "diffusion", "image-editing"], stars: "67+", forks: "8+" },
-    { name: "FoodSky", desc: "A food-oriented LLM that passes the chef and dietetic examination.", url: "https://github.com/LanceZPF/FoodSky", tags: ["food-ai", "LLM", "domain-specific"], stars: "28+", forks: "1+" },
-    { name: "KEFS", desc: "Knowledge-Enhanced Feature Synthesizer for zero-shot food detection.", url: "https://github.com/LanceZPF/KEFS", tags: ["zero-shot", "food-detection"], stars: "2+", forks: "1+" },
-    { name: "SeeDS", desc: "Semantic Separable Diffusion Synthesizer for zero-shot food detection.", url: "https://github.com/LanceZPF/SeeDS", tags: ["diffusion", "zero-shot"], stars: "12+", forks: "3+" },
-    { name: "NNED_MMGraph", desc: "Multimodal graph convolution for named entity disambiguation.", url: "https://github.com/LanceZPF/NNED_MMGraph", tags: ["NLP", "graph"], stars: "4+", forks: "0+" },
-    { name: "CMRDF", desc: "Cross-modal retrieval system for real-time food alerting.", url: "https://github.com/LanceZPF/CMRDF", tags: ["IoT", "food-computing"], stars: "1+", forks: "0+" }
+    { name: "MDK12", desc: "A comprehensive benchmark for evaluating multimodal document understanding across K-12 educational levels.", url: "https://github.com/LanceZPF/MDK12", tags: ["benchmark", "multimodal", "education"], stars: "13+", forks: "0+" },
+    { name: "OpenING", desc: "Benchmark for open-ended interleaved image-text generation evaluation.", url: "https://github.com/LanceZPF/OpenING", tags: ["benchmark", "multimodal", "interleaved generation"], stars: "40+", forks: "0+" },
+    { name: "LoongX", desc: "Neural-driven image editing via multimodal neurophysiological signals.", url: "https://github.com/LanceZPF/loongx", tags: ["BCI", "diffusion", "image editing"], stars: "67+", forks: "8+" },
+    { name: "FoodSky", desc: "A food-oriented LLM that passes the chef and dietetic examination.", url: "https://github.com/LanceZPF/FoodSky", tags: ["food computing", "LLM", "domain research"], stars: "28+", forks: "1+" },
+    { name: "KEFS", desc: "Knowledge-Enhanced Feature Synthesizer for zero-shot food detection.", url: "https://github.com/LanceZPF/KEFS", tags: ["multimodal", "food computing", "object detection"], stars: "2+", forks: "1+" },
+    { name: "SeeDS", desc: "Semantic Separable Diffusion Synthesizer for zero-shot food detection.", url: "https://github.com/LanceZPF/SeeDS", tags: ["diffusion", "food computing", "object detection"], stars: "12+", forks: "3+" },
+    { name: "NNED_MMGraph", desc: "Multimodal graph convolution for named entity disambiguation.", url: "https://github.com/LanceZPF/NNED_MMGraph", tags: ["multimodal", "graph convolution", "self-supervised"], stars: "4+", forks: "0+" },
+    { name: "CMRDF", desc: "Cross-modal retrieval system for real-time food alerting.", url: "https://github.com/LanceZPF/CMRDF", tags: ["multimodal", "AIoT", "food computing"], stars: "1+", forks: "0+" }
   ];
 
   function renderRepoCard(r) {
@@ -878,7 +898,7 @@
           <a href="${r.url}" target="_blank" class="lh-paper-title">${r.name}</a>
         </div>
         <div class="lh-paper-desc">${r.desc}</div>
-        <div class="lh-paper-tags">${r.tags.map(t => `<span class="lh-paper-tag">${t}</span>`).join("")}</div>
+        <div class="lh-paper-tags">${r.tags.map(t => `<span class="lh-paper-tag">${formatTagLabel(t)}</span>`).join("")}</div>
         <div class="lh-paper-meta-row">
           <span title="Stars">&#9733; ${r.stars}</span>
           <span title="Forks">&#127860; ${r.forks}</span>
