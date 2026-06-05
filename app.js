@@ -11,7 +11,7 @@
      ========================================================== */
 
   /* ---- CONFIG: set to true to enable dice → Order mode transition ---- */
-  const ENABLE_ORDER_MODE = false;
+  const ENABLE_ORDER_MODE = true;
 
   let _hue = Math.floor(Math.random() * 360);
   let _accent = `hsl(${_hue}, 70%, 60%)`;
@@ -197,7 +197,7 @@
     { type: "published", text: 'One paper accepted by <strong>CVPR 2026</strong>', date: "2026-03-03", note: null },
     { type: "published", text: 'One paper accepted by <strong>ICLR 2026</strong>', date: "2026-01-26", note: null },
     { type: "published", text: 'One paper accepted by <strong>IEEE Signal Processing Letters</strong>', date: "2025-12-29", note: null },
-    { type: "published", text: 'Accepted to <a>AAAI 2026</a>', date: "2025-11-08", note: null },
+    { type: "published", text: 'Published <a>MDK12-Bench</a> at <strong>AAAI 2026</strong>', date: "2025-11-08", note: null },
     { type: "published", text: 'Published <a>LoongX</a> and one more in <strong>NeurIPS 2025</strong>', date: "2025-09-18", note: "Two papers accepted" },
     { type: "published", text: 'One paper accepted by <strong>ICCV 2025</strong>', date: "2025-07-23", note: null },
     { type: "published", text: 'One paper accepted by <strong>ACL 2025 Findings</strong>', date: "2025-05-15", note: null },
@@ -209,8 +209,7 @@
     { type: "review", text: 'Reviewing for <strong>ICLR 2024</strong>', date: "2023-10-01", note: null },
     { type: "published", text: 'Published <a>SeeDS</a> in <strong>ACM MM 2023</strong>', date: "2023-10-01", note: null },
     { type: "published", text: 'Published <a>MMGraph</a> in <strong>IEEE TNNLS</strong>', date: "2022-06-01", note: null },
-    { type: "published", text: 'Published <a>ISDA</a> in <strong>ICASSP 2022</strong>', date: "2022-05-01", note: "Oral presentation" },
-    { type: "published", text: 'Published <a>MDK12-Bench</a> at <strong>AAAI 2026</strong>', date: "2025-11-08", note: null }
+    { type: "published", text: 'Published <a>ISDA</a> in <strong>ICASSP 2022</strong>', date: "2022-05-01", note: "Oral presentation" }
   ];
 
   /* ==========================================================
@@ -892,8 +891,9 @@
     const grid = document.getElementById("paperGrid");
     const gridPub = document.getElementById("paperGridPub");
     const codeGrid = document.getElementById("codeGrid");
+    const orderPinnedPapers = papers.filter(p => p.title !== "ISDA");
 
-    if (grid) grid.innerHTML = papers.map(renderLanceHubPaperCard).join("");
+    if (grid) grid.innerHTML = orderPinnedPapers.map(renderLanceHubPaperCard).join("");
     if (gridPub) gridPub.innerHTML = papers.map(renderLanceHubPaperCard).join("");
     if (codeGrid) codeGrid.innerHTML = repos.map(renderRepoCard).join("");
   }

@@ -760,34 +760,6 @@ body[data-mode="chaos"] { cursor: none; }
   flex-shrink: 0;
 }
 
-#order-layer .lh-org-list {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-#order-layer .lh-org-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  background: #30363d;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--lh-text-primary);
-  border: 1px solid #30363d;
-  cursor: default;
-  text-decoration: none;
-}
-#order-layer.light-theme .lh-org-badge {
-  background: #f6f8fa;
-  border-color: #d0d7de;
-  color: var(--lh-grey-800);
-}
-#order-layer .lh-org-badge:hover { text-decoration: none; border-color: var(--lh-orange); }
-
 /* --- Content Area --- */
 #order-layer .lh-content-area { min-width: 0; }
 
@@ -1125,7 +1097,7 @@ body[data-mode="chaos"] { cursor: none; }
   color: var(--lh-text-secondary);
 }
 
-/* Internship cards */
+/* Work cards */
 #order-layer .lh-internship-cards {
   display: flex;
   flex-direction: column;
@@ -1160,9 +1132,18 @@ body[data-mode="chaos"] { cursor: none; }
   font-size: 16px;
   margin-bottom: 2px;
 }
+#order-layer .lh-internship-company {
+  color: var(--lh-text-primary);
+  font-size: 14px;
+}
 #order-layer .lh-internship-company a {
   color: var(--lh-blue-link);
   font-size: 14px;
+}
+#order-layer .lh-internship-meta {
+  color: var(--lh-text-secondary);
+  font-size: 12px;
+  margin-top: 3px;
 }
 #order-layer .lh-internship-detail {
   font-size: 13px;
@@ -1172,6 +1153,15 @@ body[data-mode="chaos"] { cursor: none; }
 }
 #order-layer .lh-internship-detail a {
   color: var(--lh-blue-link);
+}
+#order-layer .lh-internship-bullets {
+  color: var(--lh-text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 8px 0 0 18px;
+}
+#order-layer .lh-internship-bullets li {
+  margin-bottom: 4px;
 }
 #order-layer .lh-internship-tags {
   margin-top: 10px;
@@ -1319,6 +1309,7 @@ body[data-mode="chaos"] { cursor: none; }
   #order-layer .lh-top-nav { padding-left: 50px; }
   #order-layer .lh-tab-btn { padding: 10px 8px; font-size: 12px; }
   #order-layer .lh-tab-count { display: none; }
+  #order-layer .lh-internship-card { flex-direction: column; }
 
   #mode-label { top: 8px; right: 10px; font-size: 10px; }
 }
