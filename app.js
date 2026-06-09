@@ -193,6 +193,8 @@
 
   /* Activity events for LanceHub timeline & contribution graph */
   const activities = [
+    { type: "award", text: 'Passed the <strong>NUS PhD Qualification Exam (QE)</strong>', date: "2026-06-01", note: "Officially a PhD Candidate now. Congratulations!" },
+    { type: "published", text: 'One paper accepted by <strong>ICML 2026</strong>', date: "2026-05-01", note: null },
     { type: "published", text: 'One paper accepted by <strong>ACL 2026</strong>', date: "2026-04-07", note: 'Congrats to intern <a href="https://wd7ang.github.io/" target="_blank">Weidong Tang</a>. Co-supervised with <a href="https://wangbo-zhao.github.io/" target="_blank">Dr. Zhao</a>.' },
     { type: "published", text: 'One paper accepted by <strong>CVPR 2026</strong>', date: "2026-03-03", note: null },
     { type: "published", text: 'One paper accepted by <strong>ICLR 2026</strong>', date: "2026-01-26", note: null },
@@ -691,8 +693,9 @@
       { year: 2022, label: "Multiple Papers", progress: 0.38 },
       { year: 2024, label: "M.E. @ ICT-CAS", progress: 0.46 },
       { year: 2025, label: "NUS PhD Enroll", progress: 0.55 },
-      { year: 2025.8, label: "CVPR Oral + NeurIPS + Cell Patterns", progress: 0.86 },
-      { year: 2026.3, label: "ICLR + CVPR + ACL", progress: 0.83 }
+      { year: 2025.8, label: "CVPR Oral + NeurIPS + Cell Patterns", progress: 0.86, labelDx: -24, labelDy: 12, labelAnchor: "end" },
+      { year: 2026.3, label: "ICLR+CVPR+ACL+ICML", progress: 0.91, labelDx: -12, labelDy: -16, labelAnchor: "end" },
+      { year: 2026.5, label: "PhD Candidate", progress: 0.95, labelDx: 14, labelDy: -14, labelAnchor: "start" }
     ];
 
     const yearMin = 2018, yearMax = 2028;
@@ -772,8 +775,10 @@
       svg += `<circle cx="${x}" cy="${y}" r="7" fill="none" stroke="${accent}" stroke-width="1" opacity="0.3"/>`;
       const idx = events.indexOf(ev);
       const above = idx % 2 === 0;
-      const labelY = above ? y - 14 : y + 20;
-      svg += `<text x="${x}" y="${labelY}" fill="#ccc" font-family="'JetBrains Mono',monospace" font-size="10" text-anchor="middle">${ev.label}</text>`;
+      const labelX = x + (ev.labelDx || 0);
+      const labelY = y + (ev.labelDy ?? (above ? -14 : 20));
+      const labelAnchor = ev.labelAnchor || "middle";
+      svg += `<text x="${labelX}" y="${labelY}" fill="#ccc" font-family="'JetBrains Mono',monospace" font-size="10" text-anchor="${labelAnchor}">${ev.label}</text>`;
     }
 
     svg += `</svg>`;
