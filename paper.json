@@ -110,6 +110,25 @@
         }
     },
     {
+        "title": "ISDA: Position-Aware Instance Segmentation with Deformable Attention",
+        "author": ["Kaining Ying", "Zhenhua Wang", "Cong Bai", "Pengfei Zhou"],
+        "description": "We present a novel end-to-end Instance Segmentation framework based on Transformer and get 38.7 mAP with ResNet-50 on MS COCO test-dev.",
+        "year": "2022",
+        "publisher": "IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+        "image": "./files/papers/isda_icassp_2022/isda.png",
+        "pdf": "./files/papers/isda_icassp_2022/camera_ready.pdf",
+        "equal": false,
+        "oral": true,
+        "meta" :{
+            "BibTex": "./files/papers/isda_icassp_2022/ying2022isda.bib",
+            "GitHub": "https://github.com/yingkaining/isda",
+            "arXiv": "https://arxiv.org/abs/2202.12251",
+            "Poster": "./files/papers/isda_icassp_2022/poster.pdf",
+            "Video": "https://www.bilibili.com/video/BV1RT4y1Y7qW?spm_id_from=333.999.0.0",
+            "Slides": "./files/papers/isda_icassp_2022/slides.pdf"
+        }
+    },
+    {
         "title": "Exploring Implicit and Explicit Relations with the Dual Relation-Aware Network for Image Captioning",
         "author": ["Zhiwei Zha", "Pengfei Zhou", "Cong Bai"],
         "description": "We introduce a novel Dual Relation-Aware Network (DRAN) for image captioning which composes of a dual-path relation encoder and an adaptive context relation decoder. The DRAN can address the problem that the relations that just appeared in sentences but cannot be visually observed in images",
