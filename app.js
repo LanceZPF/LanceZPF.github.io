@@ -251,7 +251,7 @@
     "FoodSky: A Food-oriented Large Language Model that Passes the Chef and Dietetic Examination"
   ];
 
-  const CHAOS_HIDDEN_TITLES = new Set(["SeeDS", "MMGraph", "CMRDF"]);
+  const CHAOS_HIDDEN_TITLES = new Set(["SeeDS", "MMGraph", "CMRDF", "ISDA"]);
 
   function partitionPinnedPapers(source) {
     const papersByTitle = new Map(source.map(p => [p.fullTitle, p]));
@@ -972,7 +972,7 @@
 
   /* ---- Standalone repos (Code tab) ---- */
   const repos = [
-    { name: "Agent-as-a-Router", desc: "Agentic model routing for coding tasks with ACRouter and CodeRouterBench.", url: "https://github.com/LanceZPF/agent-as-a-router", tags: ["agent", "model routing", "coding"], stars: "503", forks: "14" },
+    { name: "Agent-as-a-Router", desc: "Agentic model routing for coding tasks with ACRouter and CodeRouterBench.", url: "https://github.com/LanceZPF/agent-as-a-router", tags: ["agent", "model routing", "coding"], stars: "500+", forks: "10+" },
     { name: "EvalHall", desc: "Evaluation framework for hallucination detection in multimodal models.", url: "https://github.com/LanceZPF/EvalHall", tags: ["evaluation", "hallucination", "multimodal"], stars: "1+", forks: "0+" },
     { name: "MDK12", desc: "A comprehensive benchmark for evaluating multimodal document understanding across K-12 educational levels.", url: "https://github.com/LanceZPF/MDK12", tags: ["benchmark", "multimodal", "education"], stars: "13+", forks: "0+" },
     { name: "OpenING", desc: "Benchmark for open-ended interleaved image-text generation evaluation.", url: "https://github.com/LanceZPF/OpenING", tags: ["benchmark", "multimodal", "interleaved generation"], stars: "40+", forks: "0+" },
