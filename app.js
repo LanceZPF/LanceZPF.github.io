@@ -13,7 +13,16 @@
   /* ---- CONFIG: set to true to enable dice → Order mode transition ---- */
   const ENABLE_ORDER_MODE = true;
 
-  let _hue = Math.floor(Math.random() * 360);
+  const HOT_PINK_HUE_MIN = 315;
+  const HOT_PINK_HUE_MAX = 345;
+  const ACCENT_HUES = Array.from({ length: 360 }, (_, hue) => hue)
+    .filter((hue) => hue < HOT_PINK_HUE_MIN || hue > HOT_PINK_HUE_MAX);
+
+  function pickAccentHue() {
+    return ACCENT_HUES[Math.floor(Math.random() * ACCENT_HUES.length)];
+  }
+
+  let _hue = pickAccentHue();
   let _accent = `hsl(${_hue}, 70%, 60%)`;
   let _accentDim = `hsla(${_hue}, 70%, 60%, 0.15)`;
   const root = document.documentElement;
@@ -30,7 +39,7 @@
   applyAccent();
 
   function setNewAccent() {
-    _hue = Math.floor(Math.random() * 360);
+    _hue = pickAccentHue();
     _accent = `hsl(${_hue}, 70%, 60%)`;
     _accentDim = `hsla(${_hue}, 70%, 60%, 0.15)`;
     applyAccent();
@@ -64,6 +73,69 @@
 
   const papers = [
     {
+      title: "Agent-as-a-Router",
+      fullTitle: "Agent-as-a-Router: Agentic Model Routing for Coding Tasks",
+      desc: "An agentic model-routing framework for coding tasks that closes the information gap through a Context–Action–Feedback loop, backed by ACRouter and CodeRouterBench.",
+      venue: "Under Review", year: 2026, oral: false,
+      venueColor: "#8b949e",
+      tags: ["agent", "model routing", "coding", "benchmark"],
+      stars: 0, forks: 0,
+      links: {
+        Homepage: "https://www.omnisource.cn/agent-as-a-router",
+        arXiv: "https://arxiv.org/abs/2606.22902",
+        Dataset: "https://huggingface.co/datasets/Lance1573/CodeRouterBench"
+      },
+      github: "https://github.com/LanceZPF/agent-as-a-router",
+      date: "2026-06-22"
+    },
+    {
+      title: "RDS",
+      fullTitle: "Efficient Video Object Segmentation and Tracking with Recurrent Dynamic Submodel",
+      desc: "A recurrent dynamic submodel for efficient video object segmentation and tracking, combining temporal-prior-guided routing with Importance-aware LoRA for an effective accuracy-speed trade-off.",
+      venue: "CVPR 2026", year: 2026, oral: false,
+      venueColor: "#3fb950",
+      tags: ["video segmentation", "video tracking", "dynamic model", "SAM2"],
+      stars: 0, forks: 0,
+      links: {
+        CVF: "https://openaccess.thecvf.com/content/CVPR2026/html/Tang_Efficient_Video_Object_Segmentation_and_Tracking_with_Recurrent_Dynamic_Submodel_CVPR_2026_paper.html",
+        PDF: "https://openaccess.thecvf.com/content/CVPR2026/papers/Tang_Efficient_Video_Object_Segmentation_and_Tracking_with_Recurrent_Dynamic_Submodel_CVPR_2026_paper.pdf"
+      },
+      github: null,
+      date: "2026-03-03"
+    },
+    {
+      title: "GroupToM-Bench",
+      fullTitle: "GroupToM-Bench: Benchmarking Group Theory of Mind and Nonlinear Social Emergence in MLLMs",
+      desc: "The first multimodal benchmark for group-level Theory of Mind, auditing individual mental states, group tension, and nonlinear collective outcomes across seven cognitive levels.",
+      venue: "ACL 2026", year: 2026, oral: false,
+      venueColor: "#58a6ff",
+      tags: ["multimodal", "theory of mind", "social reasoning", "benchmark"],
+      stars: 0, forks: 0,
+      links: {
+        ACL: "https://aclanthology.org/2026.acl-long.1859/",
+        arXiv: "https://arxiv.org/abs/2606.04184",
+        Dataset: "https://huggingface.co/datasets/Twwwd/GroupToM-Bench"
+      },
+      github: null,
+      date: "2026-04-07"
+    },
+    {
+      title: "TMD-Bench",
+      fullTitle: "TMD-Bench: A Multi-Level Evaluation Paradigm for Music–Dance Co-Generation",
+      desc: "A multi-level benchmark for text-driven music–dance co-generation, evaluating unimodal quality, instruction adherence, and cross-modal rhythmic alignment alongside the RhyJAM baseline.",
+      venue: "ICML 2026", year: 2026, oral: false,
+      venueColor: "#d29922",
+      tags: ["audio-visual generation", "music-dance", "benchmark", "rhythmic alignment"],
+      stars: 0, forks: 0,
+      links: {
+        ICML: "https://icml.cc/virtual/2026/poster/65225",
+        OpenReview: "https://openreview.net/forum?id=FcklDFAnzF",
+        arXiv: "https://arxiv.org/abs/2605.01809"
+      },
+      github: "https://github.com/MM-Speech/TMD-Bench",
+      date: "2026-05-03"
+    },
+    {
       title: "OpenING",
       fullTitle: "OpenING: A Comprehensive Benchmark for Judging Open-ended Interleaved Image-Text Generation",
       desc: "A comprehensive benchmark with 5,400 human-annotated instances across 56 real-world tasks for evaluating open-ended interleaved image-text generation models.",
@@ -96,7 +168,7 @@
       tags: ["food computing", "LLM", "domain research"],
       stars: 42, forks: 10,
       links: { Demo: "http://222.92.101.211:8200", arXiv: "https://arxiv.org/abs/2406.10261" },
-      github: null,
+      github: "https://github.com/LanceZPF/FoodSky",
       date: "2025-03-27"
     },
     {
@@ -180,6 +252,10 @@
 
   /* Per-paper icons (unique emoji for each paper) */
   const paperIcons = {
+    "Agent-as-a-Router": "&#129302;",
+    "RDS":      "&#127916;",
+    "GroupToM-Bench": "&#128101;",
+    "TMD-Bench": "&#127925;",
     "OpenING":  "&#128302;",
     "LoongX":   "&#129504;",
     "FoodSky":  "&#127859;",
