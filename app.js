@@ -246,9 +246,21 @@
   ];
 
   const PINNED_TITLES = [
+    "Agent-as-a-Router: Agentic Model Routing for Coding Tasks",
     "OpenING: A Comprehensive Benchmark for Judging Open-ended Interleaved Image-Text Generation",
     "FoodSky: A Food-oriented Large Language Model that Passes the Chef and Dietetic Examination"
   ];
+
+  const CHAOS_HIDDEN_TITLES = new Set(["SeeDS", "MMGraph", "CMRDF"]);
+
+  function partitionPinnedPapers(source) {
+    const papersByTitle = new Map(source.map(p => [p.fullTitle, p]));
+    const pinned = PINNED_TITLES.map(title => papersByTitle.get(title)).filter(Boolean);
+    const pinnedTitles = new Set(PINNED_TITLES);
+    const rest = source.filter(p => !pinnedTitles.has(p.fullTitle));
+
+    return { pinned, rest };
+  }
 
   /* Per-paper icons (unique emoji for each paper) */
   const paperIcons = {
@@ -727,8 +739,8 @@
 
   function renderChaosPapers() {
     const list = document.getElementById("paper-list");
-    const pinned = papers.filter(p => PINNED_TITLES.includes(p.fullTitle));
-    const rest = papers.filter(p => !PINNED_TITLES.includes(p.fullTitle));
+    const visiblePapers = papers.filter(p => !CHAOS_HIDDEN_TITLES.has(p.title));
+    const { pinned, rest } = partitionPinnedPapers(visiblePapers);
     const shuffledRest = [...rest].sort(() => Math.random() - 0.5);
     const ordered = [...pinned, ...shuffledRest];
     list.innerHTML = "";
@@ -993,10 +1005,12 @@
     const grid = document.getElementById("paperGrid");
     const gridPub = document.getElementById("paperGridPub");
     const codeGrid = document.getElementById("codeGrid");
-    const orderPinnedPapers = papers.filter(p => p.title !== "ISDA");
+    const { pinned, rest } = partitionPinnedPapers(papers);
+    const representativePapers = [...pinned, ...rest];
+    const orderPinnedPapers = representativePapers.filter(p => p.title !== "ISDA");
 
     if (grid) grid.innerHTML = orderPinnedPapers.map(renderLanceHubPaperCard).join("");
-    if (gridPub) gridPub.innerHTML = papers.map(renderLanceHubPaperCard).join("");
+    if (gridPub) gridPub.innerHTML = representativePapers.map(renderLanceHubPaperCard).join("");
     if (codeGrid) codeGrid.innerHTML = repos.map(renderRepoCard).join("");
   }
 
