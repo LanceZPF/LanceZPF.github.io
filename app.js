@@ -89,6 +89,22 @@
       date: "2026-06-22"
     },
     {
+      title: "RAPID³",
+      fullTitle: "RAPID³: Tri-Level Reinforced Acceleration Policies for Diffusion Transformer",
+      desc: "Image-wise reinforcement learning policies jointly coordinate step skipping, cache reuse, and sparse attention to accelerate frozen Diffusion Transformers by nearly 3× while maintaining competitive generation quality.",
+      venue: "ICLR 2026", year: 2026, oral: false,
+      venueColor: "#bc8cff",
+      tags: ["diffusion transformer", "model acceleration", "reinforcement learning", "generative AI"],
+      stars: 1, forks: 0,
+      links: {
+        ICLR: "https://iclr.cc/virtual/2026/poster/10007060",
+        OpenReview: "https://openreview.net/forum?id=sQ0g6EkpF7",
+        arXiv: "https://arxiv.org/abs/2509.22323"
+      },
+      github: "https://github.com/NUS-HPC-AI-Lab/RAPID3",
+      date: "2026-01-26"
+    },
+    {
       title: "RDS",
       fullTitle: "Efficient Video Object Segmentation and Tracking with Recurrent Dynamic Submodel",
       desc: "A recurrent dynamic submodel for efficient video object segmentation and tracking, combining temporal-prior-guided routing with Importance-aware LoRA for an effective accuracy-speed trade-off.",
@@ -265,6 +281,7 @@
   /* Per-paper icons (unique emoji for each paper) */
   const paperIcons = {
     "Agent-as-a-Router": "&#129302;",
+    "RAPID³":   "&#9889;",
     "RDS":      "&#127916;",
     "GroupToM-Bench": "&#128101;",
     "TMD-Bench": "&#127925;",
