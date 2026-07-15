@@ -78,7 +78,7 @@
       desc: "An agentic model-routing framework for coding tasks that closes the information gap through a Context–Action–Feedback loop, backed by ACRouter and CodeRouterBench.",
       venue: "Under Review", year: 2026, oral: false,
       venueColor: "#8b949e",
-      tags: ["agent", "model routing", "coding", "benchmark"],
+      tags: ["agent", "model routing", "coding"],
       stars: 503, forks: 14,
       links: {
         Homepage: "https://www.omnisource.cn/agent-as-a-router",
@@ -94,7 +94,7 @@
       desc: "Image-wise reinforcement learning policies jointly coordinate step skipping, cache reuse, and sparse attention to accelerate frozen Diffusion Transformers by nearly 3× while maintaining competitive generation quality.",
       venue: "ICLR 2026", year: 2026, oral: false,
       venueColor: "#bc8cff",
-      tags: ["diffusion transformer", "model acceleration", "reinforcement learning", "generative AI"],
+      tags: ["diffusion transformer", "model acceleration", "reinforcement learning"],
       stars: 1, forks: 0,
       links: {
         ICLR: "https://iclr.cc/virtual/2026/poster/10007060",
@@ -141,7 +141,7 @@
       desc: "A multi-level benchmark for text-driven music–dance co-generation, evaluating unimodal quality, instruction adherence, and cross-modal rhythmic alignment alongside the RhyJAM baseline.",
       venue: "ICML 2026", year: 2026, oral: false,
       venueColor: "#d29922",
-      tags: ["audio-visual generation", "music-dance", "benchmark", "rhythmic alignment"],
+      tags: ["audio-visual generation", "music-dance", "benchmark"],
       stars: 0, forks: 0,
       links: {
         ICML: "https://icml.cc/virtual/2026/poster/65225",
@@ -949,7 +949,8 @@
     ["llm", "LLM"],
     ["mllm", "MLLM"],
     ["nlp", "NLP"],
-    ["rlvr", "RLVR"]
+    ["rlvr", "RLVR"],
+    ["sam2", "SAM2"]
   ]);
 
   function formatTagLabel(tag) {
@@ -1024,10 +1025,10 @@
     const codeGrid = document.getElementById("codeGrid");
     const { pinned, rest } = partitionPinnedPapers(papers);
     const representativePapers = [...pinned, ...rest];
-    const orderPinnedPapers = representativePapers.filter(p => p.title !== "ISDA");
+    const publicationCards = representativePapers.map(renderLanceHubPaperCard).join("");
 
-    if (grid) grid.innerHTML = orderPinnedPapers.map(renderLanceHubPaperCard).join("");
-    if (gridPub) gridPub.innerHTML = representativePapers.map(renderLanceHubPaperCard).join("");
+    if (grid) grid.innerHTML = publicationCards;
+    if (gridPub) gridPub.innerHTML = publicationCards;
     if (codeGrid) codeGrid.innerHTML = repos.map(renderRepoCard).join("");
   }
 
