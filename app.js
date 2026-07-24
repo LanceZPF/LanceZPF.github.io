@@ -73,6 +73,23 @@
 
   const papers = [
     {
+      title: "Why Game Development Matters for Scaling World Models",
+      fullTitle: "Why Game Development Matters for Scaling World Models",
+      desc: "A position paper arguing that game development provides executable human-engine feedback for scaling world models, introducing AWoMo and RLHEV to turn verified development traces into recursive training data.",
+      venue: "Position Paper", year: 2026, oral: false,
+      venueColor: "#f0883e",
+      tags: ["world models", "game development", "reinforcement learning", "multimodal"],
+      stars: 1, forks: 0,
+      links: {
+        AlphaXiv: "https://www.alphaxiv.org/abs/2607.game-development-scaling-world-models",
+        Zenodo: "https://zenodo.org/records/21264942",
+        PDF: "https://zenodo.org/records/21264942/files/Why_Game_Development_Matters_for_Scaling_World_Models__1_.pdf?download=1",
+        Homepage: "https://www.cardinal-agi.com/"
+      },
+      github: "https://github.com/LanceZPF/cardinal-preview",
+      date: "2026-07-08"
+    },
+    {
       title: "Agent-as-a-Router",
       fullTitle: "Agent-as-a-Router: Agentic Model Routing for Coding Tasks",
       desc: "An agentic model-routing framework for coding tasks that closes the information gap through a Context–Action–Feedback loop, backed by ACRouter and CodeRouterBench.",
@@ -262,6 +279,7 @@
   ];
 
   const PINNED_TITLES = [
+    "Why Game Development Matters for Scaling World Models",
     "Agent-as-a-Router: Agentic Model Routing for Coding Tasks",
     "OpenING: A Comprehensive Benchmark for Judging Open-ended Interleaved Image-Text Generation",
     "FoodSky: A Food-oriented Large Language Model that Passes the Chef and Dietetic Examination"
@@ -280,6 +298,7 @@
 
   /* Per-paper icons (unique emoji for each paper) */
   const paperIcons = {
+    "Why Game Development Matters for Scaling World Models": "&#127918;",
     "Agent-as-a-Router": "&#129302;",
     "RAPID³":   "&#9889;",
     "RDS":      "&#127916;",
@@ -968,8 +987,8 @@
     const ghLink = p.github ? `<a href="${p.github}" target="_blank" class="lh-meta-link">&#128187; Code</a>` : "";
     const oralBadge = p.oral ? '<span class="lh-badge-oral">Oral</span>' : "";
     const icon = paperIcons[p.title] || "&#128196;";
-    // Default link: arXiv > Homepage > AAAI > IEEE > Springer > first link > #
-    const defaultLink = p.links.arXiv || p.links.Homepage || p.links.AAAI || p.links.IEEE || p.links.Springer || (linkEntries.length ? linkEntries[0][1] : "#");
+    // Default link: arXiv/AlphaXiv > Homepage > publisher > first link > #
+    const defaultLink = p.links.arXiv || p.links.AlphaXiv || p.links.Homepage || p.links.AAAI || p.links.IEEE || p.links.Springer || (linkEntries.length ? linkEntries[0][1] : "#");
 
     return `
       <div class="lh-paper-card" data-searchable="${(p.fullTitle + " " + p.title + " " + p.desc + " " + p.venue + " " + p.tags.join(" ") + " " + p.year).toLowerCase()}">
