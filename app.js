@@ -78,12 +78,11 @@
       desc: "A position paper arguing that game development provides executable human-engine feedback for scaling world models, introducing AWoMo and RLHEV to turn verified development traces into recursive training data.",
       venue: "Position Paper", year: 2026, oral: false,
       venueColor: "#f0883e",
-      tags: ["world models", "game development", "reinforcement learning", "multimodal"],
+      tags: ["world models", "reinforcement learning", "multimodal"],
       stars: 1, forks: 0,
       links: {
         AlphaXiv: "https://www.alphaxiv.org/abs/2607.game-development-scaling-world-models",
         Zenodo: "https://zenodo.org/records/21264942",
-        PDF: "https://zenodo.org/records/21264942/files/Why_Game_Development_Matters_for_Scaling_World_Models__1_.pdf?download=1",
         Homepage: "https://www.cardinal-agi.com/"
       },
       github: "https://github.com/LanceZPF/cardinal-preview",
