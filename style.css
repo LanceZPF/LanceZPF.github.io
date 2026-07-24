@@ -710,16 +710,22 @@ body[data-mode="chaos"] { cursor: none; }
   display: flex;
   align-items: center;
   gap: 4px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   font-size: 14px;
   color: var(--lh-text-secondary);
   margin-bottom: 20px;
+}
+#order-layer .lh-stat-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
 }
 #order-layer .lh-profile-stats strong {
   color: var(--lh-text-primary);
   font-weight: 600;
 }
-#order-layer .lh-stat-sep { margin: 0 4px; }
+#order-layer .lh-stat-sep { flex: 0 0 auto; }
 
 /* Achievements */
 #order-layer .lh-sidebar-section {
