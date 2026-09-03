@@ -99,7 +99,8 @@
       links: {
         Homepage: "https://www.omnisource.cn/agent-as-a-router",
         arXiv: "https://arxiv.org/abs/2606.22902",
-        Dataset: "https://huggingface.co/datasets/Lance1573/CodeRouterBench"
+        Dataset: "https://huggingface.co/datasets/Lance1573/CodeRouterBench",
+        "Route Anything": "./route-anything.html"
       },
       github: "https://github.com/LanceZPF/agent-as-a-router",
       date: "2026-06-22"
@@ -807,10 +808,12 @@
   function buildLifePath() {
     const container = document.getElementById("life-svg-container");
     const accent = _accent;
-    const W = 760, H = 320;
+    /* Width tracks the year span so labels keep a constant px-per-year spacing */
+    const W = 827, H = 320;
     const padL = 50, padR = 40, padT = 40, padB = 50;
 
     const events = [
+      { year: 2018, label: "Civil Eng. → CS", progress: 0.04, labelDx: -6, labelDy: -14, labelAnchor: "start" },
       { year: 2020, label: "First Pub", progress: 0.10 },
       { year: 2021, label: "B.E. @ ZJUT", progress: 0.26 },
       { year: 2022, label: "Multiple Papers", progress: 0.38 },
@@ -821,7 +824,7 @@
       { year: 2026.5, label: "PhD Candidate", progress: 0.95, labelDx: 14, labelDy: -14, labelAnchor: "start" }
     ];
 
-    const yearMin = 2018, yearMax = 2028;
+    const yearMin = 2017, yearMax = 2028;
     const xScale = (yr) => padL + ((yr - yearMin) / (yearMax - yearMin)) * (W - padL - padR);
     const yScale = (p) => padT + (1 - p) * (H - padT - padB);
 
@@ -897,7 +900,8 @@
       svg += `<circle cx="${x}" cy="${y}" r="4" fill="${accent}" opacity="0.9"/>`;
       svg += `<circle cx="${x}" cy="${y}" r="7" fill="none" stroke="${accent}" stroke-width="1" opacity="0.3"/>`;
       const idx = events.indexOf(ev);
-      const above = idx % 2 === 0;
+      /* Offset by one so the pre-2020 lead-in event keeps the alternation intact */
+      const above = idx % 2 === 1;
       const labelX = x + (ev.labelDx || 0);
       const labelY = y + (ev.labelDy ?? (above ? -14 : 20));
       const labelAnchor = ev.labelAnchor || "middle";

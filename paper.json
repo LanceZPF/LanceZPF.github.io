@@ -13,7 +13,8 @@
             "Homepage": "https://www.omnisource.cn/agent-as-a-router",
             "arXiv": "https://arxiv.org/abs/2606.22902",
             "GitHub": "https://github.com/LanceZPF/agent-as-a-router",
-            "Dataset": "https://huggingface.co/datasets/Lance1573/CodeRouterBench"
+            "Dataset": "https://huggingface.co/datasets/Lance1573/CodeRouterBench",
+            "Route Anything": "https://lancezpf.github.io/route-anything.html"
         }
     },
     {

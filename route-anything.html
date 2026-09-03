@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Route Anything — a line of research on routing at every granularity: agent, model, skill, block, and denoising step." />
+  <meta property="og:title" content="Route Anything — Pengfei Zhou" />
+  <meta property="og:description" content="Routing at every granularity: agent, model, skill, block, and denoising step." />
+  <meta property="og:type" content="website" />
+  <title>Route Anything — Pengfei Zhou</title>
+  <link rel="icon" href="./files/about/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ===================================================
+       Route Anything — subpage of the Chaos-mode portfolio
+       Inherits: #0a0a0a / JetBrains Mono / hsl(200,70%,60%)
+       Adds:     a coarse -> fine granularity ramp (cool -> warm)
+       =================================================== */
+
+    :root {
+      --bg: #0a0a0a;
+      --text: #e0e0e0;
+      --text-dim: #9a9a9a;
+      --text-muted: #666666;
+      --rule: #1e1e1e;
+      --accent: hsl(200, 70%, 60%);
+
+      /* granularity ramp: L0 coarsest -> L4 finest */
+      --l0: hsl(200, 70%, 60%);
+      --l1: hsl(178, 62%, 56%);
+      --l2: hsl(150, 55%, 55%);
+      --l3: hsl(80, 58%, 57%);
+      --l4: hsl(36, 85%, 62%);
+
+      --font: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      background: var(--bg);
+      font-family: var(--font);
+      font-size: 13px;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Atmosphere: faint grid + a single accent bloom behind the hero */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 78%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 78%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: -320px; left: 50%;
+      width: 900px; height: 700px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle, hsla(200, 70%, 60%, 0.10) 0%, transparent 62%);
+    }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    a { color: var(--accent); text-decoration: none; transition: opacity .2s; }
+    a:hover { opacity: .7; }
+
+    ::-webkit-scrollbar { width: 9px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: #333; }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 96px;
+    }
+
+    /* ---- Staggered load-in ---- */
+    .rise {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards;
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* ============ Top bar ============ */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 28px 0 0;
+      font-size: 12px;
+    }
+    .topbar .crumb { color: var(--text-muted); }
+    .topbar .crumb b { color: var(--text-dim); font-weight: 400; }
+
+    /* ============ Hero ============ */
+    .hero { padding: 64px 0 8px; }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 8vw, 62px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.02;
+      color: #fff;
+    }
+    h1 .paren { color: var(--accent); font-weight: 300; }
+
+    .lede {
+      margin-top: 24px;
+      max-width: 62ch;
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+    .lede strong { color: var(--text); font-weight: 500; }
+
+    /* ============ Routing diagram ============ */
+    .diagram {
+      margin: 44px 0 8px;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 12px 0 6px;
+      overflow-x: auto;
+    }
+    .diagram svg { display: block; width: 100%; height: auto; }
+    .nlab { font-family: var(--font); font-size: 11px; }
+    .rlab { font-family: var(--font); font-size: 12px; }
+
+    .edge {
+      fill: none;
+      stroke-dasharray: 3 7;
+      stroke-linecap: round;
+      animation: flow 1.9s linear infinite, pick 5s ease-in-out infinite;
+    }
+    @keyframes flow { to { stroke-dashoffset: -20; } }
+    @keyframes pick {
+      0%, 13%   { opacity: 1;   stroke-width: 2.2; }
+      22%, 100% { opacity: .22; stroke-width: 1; }
+    }
+    .node-halo { animation: halo 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes halo {
+      0%, 13%   { opacity: .55; r: 11; }
+      22%, 100% { opacity: 0;   r: 6; }
+    }
+    .sig { animation: sig 1.9s linear infinite; }
+    @keyframes sig { 0% { opacity: .2 } 50% { opacity: 1 } 100% { opacity: .2 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rise { animation: none; opacity: 1; transform: none; }
+      .edge, .node-halo, .sig { animation: none; opacity: .85; }
+    }
+
+    /* ============ Section heading ============ */
+    .section-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: .03em;
+      margin: 72px 0 8px;
+    }
+    .section-note {
+      font-size: 11px;
+      color: #4a4a4a;
+      margin-bottom: 34px;
+    }
+
+    /* ============ Granularity ladder ============ */
+    .rung {
+      position: relative;
+      padding: 0 0 8px 42px;
+      margin-bottom: 40px;
+    }
+    /* the rail */
+    .rung::before {
+      content: "";
+      position: absolute;
+      left: 6px; top: 16px; bottom: -40px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--c), var(--c-next, transparent));
+      opacity: .3;
+    }
+    .rung:last-of-type::before { bottom: auto; height: 0; }
+
+    .rung .knob {
+      position: absolute;
+      left: 0; top: 9px;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      border: 1px solid var(--c);
+      background: var(--bg);
+      transition: box-shadow .25s, background .25s;
+    }
+    .rung .knob::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--c);
+      opacity: .85;
+    }
+    .rung:hover .knob { box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 12%, transparent); }
+
+    .rung-head {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .lvl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--c);
+    }
+    .gran {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .gran .arrow { color: var(--c); opacity: .6; margin: 0 2px; }
+
+    .card {
+      border-left: 2px solid var(--c);
+      padding: 14px 0 16px 18px;
+      transition: border-left-width .2s, padding-left .2s;
+    }
+    .rung:hover .card { border-left-width: 4px; padding-left: 16px; }
+
+    .p-title {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+    }
+    .p-venue {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--bg);
+      background: var(--c);
+      padding: 1px 7px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .p-desc {
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 1.85;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 68ch;
+    }
+    .p-desc em { color: var(--text); font-style: normal; font-weight: 500; }
+
+    .p-links {
+      margin-top: 12px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+    .p-links a { color: var(--c); opacity: .7; }
+    .p-links a:hover { opacity: 1; }
+
+    /* ---- Tri-level breakdown (RAPID^3) ---- */
+    .tri {
+      margin-top: 20px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      background: rgba(255,255,255,0.014);
+    }
+    .tri-cap {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tier {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 4px 16px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tier:last-child { border-bottom: none; }
+    .tier-k {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: var(--c);
+      padding-top: 2px;
+    }
+    .tier-k span {
+      display: block;
+      font-weight: 400;
+      letter-spacing: .04em;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .tier-n { font-size: 13px; font-weight: 500; color: var(--text); }
+    .tier-d {
+      grid-column: 2;
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+
+    /* ============ Footer ============ */
+    .foot {
+      margin-top: 84px;
+      padding-top: 26px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Narrow screens: the diagram is cropped to its informative core (see the
+       viewBox swap below) and its in-SVG labels scale up to stay legible. */
+    @media (max-width: 720px) {
+      .nlab { font-size: 16px; }
+      .rlab { font-size: 15px; }
+    }
+
+    @media (max-width: 620px) {
+      .wrap { padding: 0 18px 72px; }
+      .hero { padding-top: 44px; }
+      .rung { padding-left: 32px; }
+      .tier { grid-template-columns: 1fr; gap: 4px; }
+      .tier-d { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- ============ Top bar ============ -->
+    <nav class="topbar rise" style="animation-delay:.05s">
+      <a href="./index.html">[&#8592; index]</a>
+      <span class="crumb">pengfei zhou <b>/</b> route_anything</span>
+    </nav>
+
+    <!-- ============ Hero ============ -->
+    <header class="hero rise" style="animation-delay:.12s">
+      <div class="eyebrow">research thread</div>
+      <h1>Route<br />Anything<span class="paren">()</span></h1>
+      <p class="lede">
+        No single model, skill, block, or computation path is best at everything &mdash; so the
+        interesting question is never <em>which one</em>, but <strong>who decides, at what granularity,
+        and with what feedback</strong>. This thread runs that same question down the whole stack:
+        from routing across frontier LLMs in an agent loop, all the way down to routing individual
+        attention computations inside a single denoising step.
+      </p>
+    </header>
+
+    <!-- ============ Routing diagram ============ -->
+    <div class="diagram rise" style="animation-delay:.2s" aria-hidden="true">
+      <svg viewBox="0 0 720 216" xmlns="http://www.w3.org/2000/svg">
+        <!-- input -->
+        <text x="16" y="104" fill="#666" font-family="'JetBrains Mono',monospace" font-size="10">any task</text>
+        <line x1="16" y1="112" x2="118" y2="112" stroke="#2a2a2a" stroke-width="1" />
+        <circle class="sig" cx="118" cy="112" r="2.5" fill="hsl(200,70%,60%)" />
+
+        <!-- router -->
+        <rect x="126" y="94" width="90" height="36" rx="2" fill="none" stroke="#333" stroke-width="1" />
+        <text class="rlab" x="171" y="116" fill="#8a8a8a" text-anchor="middle">router</text>
+
+        <!-- edges: coarse (top) -> fine (bottom) -->
+        <path class="edge" style="animation-delay:0s,0s"     d="M 218 112 C 284 112, 356 24,  548 24"  stroke="hsl(200,70%,60%)" />
+        <path class="edge" style="animation-delay:0s,1s"     d="M 218 112 C 284 112, 356 68,  548 68"  stroke="hsl(178,62%,56%)" />
+        <path class="edge" style="animation-delay:0s,2s"     d="M 218 112 C 284 112, 356 112, 548 112" stroke="hsl(150,55%,55%)" />
+        <path class="edge" style="animation-delay:0s,3s"     d="M 218 112 C 284 112, 356 156, 548 156" stroke="hsl(80,58%,57%)" />
+        <path class="edge" style="animation-delay:0s,4s"     d="M 218 112 C 284 112, 356 200, 548 200" stroke="hsl(36,85%,62%)" />
+
+        <!-- targets -->
+        <circle class="node-halo" style="animation-delay:0s" cx="552" cy="24"  fill="hsl(200,70%,60%)" r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:1s" cx="552" cy="68"  fill="hsl(178,62%,56%)" r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:2s" cx="552" cy="112" fill="hsl(150,55%,55%)" r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:3s" cx="552" cy="156" fill="hsl(80,58%,57%)"  r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:4s" cx="552" cy="200" fill="hsl(36,85%,62%)"  r="6" opacity="0" />
+
+        <circle cx="552" cy="24"  r="3.5" fill="hsl(200,70%,60%)" />
+        <circle cx="552" cy="68"  r="3.5" fill="hsl(178,62%,56%)" />
+        <circle cx="552" cy="112" r="3.5" fill="hsl(150,55%,55%)" />
+        <circle cx="552" cy="156" r="3.5" fill="hsl(80,58%,57%)" />
+        <circle cx="552" cy="200" r="3.5" fill="hsl(36,85%,62%)" />
+
+        <text class="nlab" x="568" y="28"  fill="#8a8a8a">agent</text>
+        <text class="nlab" x="568" y="72"  fill="#8a8a8a">model</text>
+        <text class="nlab" x="568" y="116" fill="#8a8a8a">skill</text>
+        <text class="nlab" x="568" y="160" fill="#8a8a8a">block</text>
+        <text class="nlab" x="568" y="204" fill="#8a8a8a">step</text>
+
+        <!-- scale rail -->
+        <text x="694" y="28"  fill="#3d3d3d" font-family="'JetBrains Mono',monospace" font-size="9" text-anchor="end">coarse</text>
+        <text x="694" y="204" fill="#3d3d3d" font-family="'JetBrains Mono',monospace" font-size="9" text-anchor="end">fine</text>
+      </svg>
+    </div>
+
+    <!-- ============ Ladder ============ -->
+    <h2 class="section-label rise" style="animation-delay:.26s">granularity := [coarse &#8594; fine]</h2>
+    <p class="section-note rise" style="animation-delay:.28s">// five levels of the same decision problem. five papers.</p>
+
+    <!-- ---------- L0: agentic routing ---------- -->
+    <section class="rung rise" style="--c: var(--l0); --c-next: var(--l1); animation-delay:.32s">
+      <span class="knob"></span>
+      <div class="rung-head">
+        <span class="lvl">L0</span>
+        <span class="gran">agentic routing <span class="arrow">&#8594;</span> which LLM runs this task</span>
+      </div>
+      <div class="card">
+        <div class="p-title">Agent-as-a-Router: Agentic Model Routing for Coding Tasks<span class="badge">first agentic routing framework</span></div>
+        <div class="p-venue">Under Review &middot; 2026</div>
+        <p class="p-desc">
+          Prior routers treat model selection as a <em>static, one-off classification problem</em>, and their real
+          weakness is an information gap: simply handing a plain LLM router task-dimension performance statistics
+          already buys a 15.3% relative gain over a heuristic router with the same priors. Agent-as-a-Router instead
+          recasts routing as a <em>Context &#8594; Action &#8594; Feedback loop</em> that accumulates execution-grounded
+          experience while deployed. The concrete system, <em>ACRouter</em>, pairs an Orchestrator, a Verifier, and a
+          Memory module; <em>CodeRouterBench</em> supplies roughly 10K task instances scored across 8 frontier LLMs so
+          routers can be compared by cumulative regret on streaming tasks rather than one-shot accuracy.
+        </p>
+        <div class="p-links">
+          <a href="https://www.omnisource.cn/agent-as-a-router" target="_blank" rel="noopener">[homepage]</a>
+          <a href="https://arxiv.org/abs/2606.22902" target="_blank" rel="noopener">[arxiv]</a>
+          <a href="https://huggingface.co/datasets/Lance1573/CodeRouterBench" target="_blank" rel="noopener">[dataset]</a>
+          <a href="https://github.com/LanceZPF/agent-as-a-router" target="_blank" rel="noopener">[github]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- L1: model level (VLM) ---------- -->
+    <section class="rung rise" style="--c: var(--l1); --c-next: var(--l2); animation-delay:.38s">
+      <span class="knob"></span>
+      <div class="rung-head">
+        <span class="lvl">L1</span>
+        <span class="gran">model level <span class="arrow">&#8594;</span> which VLM, at what cost</span>
+      </div>
+      <div class="card">
+        <div class="p-title">SCOPE-Router: Cost-Aware Open-Set VLM Routing for Execution-Oriented Tasks</div>
+        <div class="p-venue">arXiv 2608.12127 &middot; 2026</div>
+        <p class="p-desc">
+          Vision-language routing had been confined to conventional VQA evaluation, uncalibrated for open-set
+          conditions, and trained with objectives that dilute multi-positive signals through softmax normalization
+          while ignoring price entirely. <em>VLM-ExecRouterBench</em> is the first execution-oriented VLM routing
+          benchmark, spanning Code, Agentic, and Search domains over 11 candidates whose costs differ by nearly two
+          orders of magnitude. <em>SCOPE-Router</em> is a dual-tower router that matches queries against model
+          behavior profiles built by hybrid calibration (random, diagnostic, and diversity sampling), so a newly
+          added model can be routed to <em>without any retraining</em>. Its architecture-agnostic objective,
+          <em>CRM+RCCR</em>, folds cost preference into continuous relevance targets via per-pair independent
+          scoring &mdash; +1.84 Rank Score out-of-distribution, +6.75 under doubly-OOD open-set evaluation.
+        </p>
+        <div class="p-links">
+          <a href="https://arxiv.org/abs/2608.12127" target="_blank" rel="noopener">[arxiv]</a>
+          <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=FLKP0NsAAAAJ&amp;sortby=pubdate&amp;authuser=1&amp;citation_for_view=FLKP0NsAAAAJ:SP6oXDckpogC" target="_blank" rel="noopener">[scholar]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- L2: skill level ---------- -->
+    <section class="rung rise" style="--c: var(--l2); --c-next: var(--l3); animation-delay:.44s">
+      <span class="knob"></span>
+      <div class="rung-head">
+        <span class="lvl">L2</span>
+        <span class="gran">skill level <span class="arrow">&#8594;</span> which tools an agent reaches for</span>
+      </div>
+      <div class="card">
+        <div class="p-title">SkillDAG: Self-Evolving Typed Skill Graphs for LLM Skill Selection at Scale</div>
+        <div class="p-venue">arXiv 2606.03056 &middot; 2026</div>
+        <p class="p-desc">
+          Once a skill library grows large enough, picking the right skill stops being a similarity problem and
+          becomes a <em>structural</em> one: skills depend on, conflict with, specialize, and duplicate one another,
+          and neither exhaustive listing nor vector search captures those relations. SkillDAG encodes them as a
+          typed directed graph handed to the agent as a <em>callable retrieval interface at inference time</em>
+          rather than frozen inside a static pipeline &mdash; every query returns vector matches, typed-edge
+          neighbors, and conflict signals together. A <em>propose-then-commit protocol</em> lets the agent write
+          back edges that real execution validated, so the routing structure compounds across episodes instead of
+          decaying. Ranking holds as the candidate pool grows tenfold, where fixed seeding-diffusion pipelines fall off.
+        </p>
+        <div class="p-links">
+          <a href="https://arxiv.org/abs/2606.03056" target="_blank" rel="noopener">[arxiv]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- L3: block level ---------- -->
+    <section class="rung rise" style="--c: var(--l3); --c-next: var(--l4); animation-delay:.5s">
+      <span class="knob"></span>
+      <div class="rung-head">
+        <span class="lvl">L3</span>
+        <span class="gran">block level <span class="arrow">&#8594;</span> which submodel runs this frame</span>
+      </div>
+      <div class="card">
+        <div class="p-title">Efficient Video Object Segmentation and Tracking with Recurrent Dynamic Submodel</div>
+        <div class="p-venue">CVPR 2026</div>
+        <p class="p-desc">
+          Here the router moves <em>inside</em> the network. Recurrent Dynamic Submodel (RDS) uses a
+          <em>prediction-aware router</em> that exploits temporal priors &mdash; consecutive video frames rarely
+          need the same capacity &mdash; to activate a different submodel per frame, and pairs it with
+          <em>Importance-aware LoRA</em> so the accuracy-speed trade-off is reached with minimal trainable
+          parameters and minimal training data.
+        </p>
+        <div class="p-links">
+          <a href="https://openaccess.thecvf.com/content/CVPR2026/html/Tang_Efficient_Video_Object_Segmentation_and_Tracking_with_Recurrent_Dynamic_Submodel_CVPR_2026_paper.html" target="_blank" rel="noopener">[cvf]</a>
+          <a href="https://openaccess.thecvf.com/content/CVPR2026/papers/Tang_Efficient_Video_Object_Segmentation_and_Tracking_with_Recurrent_Dynamic_Submodel_CVPR_2026_paper.pdf" target="_blank" rel="noopener">[pdf]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- L4: timestep-wise multi-granularity ---------- -->
+    <section class="rung rise" style="--c: var(--l4); animation-delay:.56s">
+      <span class="knob"></span>
+      <div class="rung-head">
+        <span class="lvl">L4</span>
+        <span class="gran">timestep-wise <span class="arrow">&#8594;</span> three granularities at once</span>
+      </div>
+      <div class="card">
+        <div class="p-title">RAPID&sup3;: Tri-Level Reinforced Acceleration Policies for Diffusion Transformer</div>
+        <div class="p-venue">ICLR 2026</div>
+        <p class="p-desc">
+          The finest rung, and the only one that routes at several granularities <em>simultaneously</em>. Training-free
+          diffusion accelerators normally apply one uniform heuristic to every image, while per-image dynamic networks
+          demand expensive fine-tuning. RAPID&sup3; keeps the generator <em>completely frozen</em> and instead attaches
+          three lightweight policy heads. At <em>every denoising timestep</em> all three inspect the current state and
+          independently decide their own speed-up, so the compute path is re-routed continuously as the sample evolves:
+        </p>
+
+        <div class="tri">
+          <div class="tri-cap">tri-level policy &mdash; one decision per head, per timestep</div>
+
+          <div class="tier">
+            <div class="tier-k">TIER 1<span>step</span></div>
+            <div class="tier-n">Step-Skip</div>
+            <div class="tier-d">
+              The coarsest cut: decide whether this denoising step is needed at all, and drop it wholesale when the
+              current state says the trajectory can afford it. Routing over <em>time</em>.
+            </div>
+          </div>
+
+          <div class="tier">
+            <div class="tier-k">TIER 2<span>feature</span></div>
+            <div class="tier-n">Cache-Reuse</div>
+            <div class="tier-d">
+              If the step does run, decide per block whether to recompute features or replay the cached ones from an
+              earlier timestep. Routing over <em>depth</em>.
+            </div>
+          </div>
+
+          <div class="tier">
+            <div class="tier-k">TIER 3<span>token</span></div>
+            <div class="tier-n">Sparse-Attention</div>
+            <div class="tier-d">
+              Inside whatever is actually recomputed, decide how much of the attention map is worth evaluating and
+              restrict it to a sparse subset. Routing over <em>tokens</em>.
+            </div>
+          </div>
+        </div>
+
+        <p class="p-desc">
+          All policy parameters are learned online with <em>Group Relative Policy Optimization (GRPO)</em>, and an
+          adversarially learned discriminator augments the reward so returns only rise for samples that stay near the
+          original model's distribution &mdash; which is what stops the policies from reward-hacking their way into
+          fast but degenerate outputs. Across Stable Diffusion 3 and FLUX this reaches nearly <em>3&times; faster
+          sampling</em> at competitive quality, with zero updates to the base generator.
+        </p>
+
+        <div class="p-links">
+          <a href="https://proceedings.iclr.cc/paper_files/paper/2026/hash/f1cf02ce09757f57c3b93c0db83181e0-Abstract-Conference.html" target="_blank" rel="noopener">[iclr]</a>
+          <a href="https://openreview.net/forum?id=sQ0g6EkpF7" target="_blank" rel="noopener">[openreview]</a>
+          <a href="https://arxiv.org/abs/2509.22323" target="_blank" rel="noopener">[arxiv]</a>
+          <a href="https://github.com/NUS-HPC-AI-Lab/RAPID3" target="_blank" rel="noopener">[github]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Footer ============ -->
+    <footer class="foot rise" style="animation-delay:.62s">
+      <span>route_anything() &mdash; still returning</span>
+      <span><a href="./index.html">[&#8592; back to the dice]</a></span>
+    </footer>
+
+  </div>
+
+  <script>
+    /* The diagram's lead-in and coarse/fine scale rail are decorative; on narrow
+       screens crop them out so the router and its five targets still fit. */
+    (function () {
+      var svg = document.querySelector('.diagram svg');
+      if (!svg) return;
+      var mq = window.matchMedia('(max-width: 720px)');
+      function fit() {
+        svg.setAttribute('viewBox', mq.matches ? '122 4 508 212' : '0 0 720 216');
+      }
+      fit();
+      mq.addEventListener ? mq.addEventListener('change', fit) : mq.addListener(fit);
+    })();
+  </script>
+
+</body>
+</html>
