@@ -287,6 +287,35 @@
       margin-left: 6px;
       vertical-align: middle;
     }
+    .p-venue .stars { color: var(--c); opacity: .85; }
+
+    /* External-uptake callout */
+    .cited {
+      margin-top: 14px;
+      padding: 11px 14px;
+      border: 1px solid var(--rule);
+      border-left: 2px solid var(--c);
+      border-radius: 0 3px 3px 0;
+      background: rgba(255,255,255,0.016);
+      font-size: 12.5px;
+      line-height: 1.75;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 68ch;
+    }
+    .cited-k {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--c);
+      opacity: .8;
+      margin-bottom: 3px;
+    }
+    .cited a { color: var(--c); }
+    .cited em { font-style: normal; color: var(--text); }
+
     .p-desc {
       margin-top: 12px;
       font-size: 13px;
@@ -462,8 +491,8 @@
         <span class="gran">agentic routing <span class="arrow">&#8594;</span> which LLM runs this task</span>
       </div>
       <div class="card">
-        <div class="p-title">Agent-as-a-Router: Agentic Model Routing for Coding Tasks<span class="badge">first agentic routing framework</span></div>
-        <div class="p-venue">Under Review &middot; 2026</div>
+        <div class="p-title">Agent-as-a-Router: Agentic Model Routing for Coding Tasks<span class="badge">first agentic routing</span></div>
+        <div class="p-venue">Under Review &middot; 2026 &middot; <span class="stars">&#9733; 1K+ on GitHub</span></div>
         <p class="p-desc">
           Prior routers treat model selection as a <em>static, one-off classification problem</em>, and their real
           weakness is an information gap: simply handing a plain LLM router task-dimension performance statistics
@@ -473,6 +502,13 @@
           Memory module; <em>CodeRouterBench</em> supplies roughly 10K task instances scored across 8 frontier LLMs so
           routers can be compared by cumulative regret on streaming tasks rather than one-shot accuracy.
         </p>
+        <div class="cited">
+          <span class="cited-k">picked up by</span>
+          The startup project <a href="https://github.com/opensquilla/opensquilla" target="_blank" rel="noopener">OpenSquilla</a>
+          builds on this line of work in
+          <a href="https://arxiv.org/abs/2607.11399" target="_blank" rel="noopener"><em>Agentic Routing: The Harness-Native Data Flywheel</em></a>,
+          which cites Agent-as-a-Router while pushing routing down to the harness state of each agent step.
+        </div>
         <div class="p-links">
           <a href="https://www.omnisource.cn/agent-as-a-router" target="_blank" rel="noopener">[homepage]</a>
           <a href="https://arxiv.org/abs/2606.22902" target="_blank" rel="noopener">[arxiv]</a>
@@ -505,7 +541,6 @@
         </p>
         <div class="p-links">
           <a href="https://arxiv.org/abs/2608.12127" target="_blank" rel="noopener">[arxiv]</a>
-          <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=FLKP0NsAAAAJ&amp;sortby=pubdate&amp;authuser=1&amp;citation_for_view=FLKP0NsAAAAJ:SP6oXDckpogC" target="_blank" rel="noopener">[scholar]</a>
         </div>
       </div>
     </section>
