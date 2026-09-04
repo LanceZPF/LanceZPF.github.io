@@ -316,6 +316,18 @@
     .cited a { color: var(--c); }
     .cited em { font-style: normal; color: var(--text); }
 
+    .cited-list { list-style: none; display: grid; gap: 10px; margin-top: 2px; }
+    .cited-list li { position: relative; padding-left: 15px; }
+    .cited-list li::before {
+      content: "\2192";
+      position: absolute;
+      left: 0;
+      color: var(--c);
+      opacity: .5;
+    }
+    /* JetBrains Mono carries no CJK glyphs; keep the fallback deliberate */
+    .cjk { font-family: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', sans-serif; font-size: 12px; }
+
     .p-desc {
       margin-top: 12px;
       font-size: 13px;
@@ -504,10 +516,21 @@
         </p>
         <div class="cited">
           <span class="cited-k">picked up by</span>
-          The startup project <a href="https://github.com/opensquilla/opensquilla" target="_blank" rel="noopener">OpenSquilla</a>
-          builds on this line of work in
-          <a href="https://arxiv.org/abs/2607.11399" target="_blank" rel="noopener"><em>Agentic Routing: The Harness-Native Data Flywheel</em></a>,
-          which cites Agent-as-a-Router while pushing routing down to the harness state of each agent step.
+          <ul class="cited-list">
+            <li>
+              <a href="https://github.com/opensquilla/opensquilla" target="_blank" rel="noopener">OpenSquilla</a>,
+              the token-efficient coding agent from the startup
+              <a href="https://tokenrhythm.ai/" target="_blank" rel="noopener">TokenRhythm Technologies</a>
+              <span class="cjk">(基元律动)</span> &mdash; its report
+              <a href="https://arxiv.org/abs/2607.11399" target="_blank" rel="noopener"><em>Agentic Routing: The Harness-Native Data Flywheel</em></a>
+              cites Agent-as-a-Router and carries the idea further, conditioning each step-level routing decision on
+              the full harness state and turning the resulting traces into a training flywheel.
+            </li>
+            <li>
+              <a href="https://arxiv.org/abs/2608.09155" target="_blank" rel="noopener"><em>Beyond Tier Labels: Role- and Deployment-Dependent Model Substitution in Multi-Call LLM Workflows</em></a>
+              &mdash; Wang &amp; Cui, 2026.
+            </li>
+          </ul>
         </div>
         <div class="p-links">
           <a href="https://www.omnisource.cn/agent-as-a-router" target="_blank" rel="noopener">[homepage]</a>
