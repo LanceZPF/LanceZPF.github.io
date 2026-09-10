@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Route Anything — a line of research on routing at every granularity: agent, model, skill, block, and denoising step." />
+  <meta name="description" content="Route Anything — a line of research on routing at every granularity: agent, model, strategy, skill, block, and denoising step." />
   <meta property="og:title" content="Route Anything — Pengfei Zhou" />
-  <meta property="og:description" content="Routing at every granularity: agent, model, skill, block, and denoising step." />
+  <meta property="og:description" content="Routing at every granularity: agent, model, strategy, skill, block, and denoising step." />
   <meta property="og:type" content="website" />
   <title>Route Anything — Pengfei Zhou</title>
   <link rel="icon" href="./files/about/favicon.ico" />
@@ -27,12 +27,13 @@
       --rule: #1e1e1e;
       --accent: hsl(200, 70%, 60%);
 
-      /* granularity ramp: L0 coarsest -> L4 finest */
+      /* granularity ramp: L0 coarsest -> L5 finest */
       --l0: hsl(200, 70%, 60%);
-      --l1: hsl(178, 62%, 56%);
-      --l2: hsl(150, 55%, 55%);
-      --l3: hsl(80, 58%, 57%);
-      --l4: hsl(36, 85%, 62%);
+      --l1: hsl(182, 62%, 56%);
+      --l2: hsl(160, 55%, 55%);
+      --l3: hsl(120, 45%, 58%);
+      --l4: hsl(75, 58%, 57%);
+      --l5: hsl(36, 85%, 62%);
 
       --font: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     }
@@ -166,17 +167,17 @@
       fill: none;
       stroke-dasharray: 3 7;
       stroke-linecap: round;
-      animation: flow 1.9s linear infinite, pick 5s ease-in-out infinite;
+      animation: flow 1.9s linear infinite, pick 6s ease-in-out infinite;
     }
     @keyframes flow { to { stroke-dashoffset: -20; } }
     @keyframes pick {
-      0%, 13%   { opacity: 1;   stroke-width: 2.2; }
-      22%, 100% { opacity: .22; stroke-width: 1; }
+      0%, 11%   { opacity: 1;   stroke-width: 2.2; }
+      19%, 100% { opacity: .22; stroke-width: 1; }
     }
-    .node-halo { animation: halo 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .node-halo { animation: halo 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
     @keyframes halo {
-      0%, 13%   { opacity: .55; r: 11; }
-      22%, 100% { opacity: 0;   r: 6; }
+      0%, 11%   { opacity: .55; r: 11; }
+      19%, 100% { opacity: 0;   r: 6; }
     }
     .sig { animation: sig 1.9s linear infinite; }
     @keyframes sig { 0% { opacity: .2 } 50% { opacity: 1 } 100% { opacity: .2 } }
@@ -430,7 +431,7 @@
       <div class="eyebrow">research thread</div>
       <h1>Route Anything</h1>
       <p class="lede">
-        No single model, skill, block, or computation path is best at everything, so the
+        No single model, strategy, skill, block, or computation path is best at everything, so the
         interesting question is never <em>which one</em>, but <strong>who decides, at what granularity,
         and with what feedback</strong>. This thread runs that same question down the whole stack:
         from routing across frontier LLMs in an agent loop, all the way down to routing individual
@@ -451,40 +452,44 @@
         <text class="rlab" x="171" y="116" fill="#8a8a8a" text-anchor="middle">router</text>
 
         <!-- edges: coarse (top) -> fine (bottom) -->
-        <path class="edge" style="animation-delay:0s,0s"     d="M 218 112 C 284 112, 356 24,  548 24"  stroke="hsl(200,70%,60%)" />
-        <path class="edge" style="animation-delay:0s,1s"     d="M 218 112 C 284 112, 356 68,  548 68"  stroke="hsl(178,62%,56%)" />
-        <path class="edge" style="animation-delay:0s,2s"     d="M 218 112 C 284 112, 356 112, 548 112" stroke="hsl(150,55%,55%)" />
-        <path class="edge" style="animation-delay:0s,3s"     d="M 218 112 C 284 112, 356 156, 548 156" stroke="hsl(80,58%,57%)" />
-        <path class="edge" style="animation-delay:0s,4s"     d="M 218 112 C 284 112, 356 200, 548 200" stroke="hsl(36,85%,62%)" />
+        <path class="edge" style="animation-delay:0s,0s"     d="M 218 112 C 284 112, 356 20,  548 20"  stroke="hsl(200,70%,60%)" />
+        <path class="edge" style="animation-delay:0s,1s"     d="M 218 112 C 284 112, 356 56,  548 56"  stroke="hsl(182,62%,56%)" />
+        <path class="edge" style="animation-delay:0s,2s"     d="M 218 112 C 284 112, 356 92,  548 92"  stroke="hsl(160,55%,55%)" />
+        <path class="edge" style="animation-delay:0s,3s"     d="M 218 112 C 284 112, 356 128, 548 128" stroke="hsl(120,45%,58%)" />
+        <path class="edge" style="animation-delay:0s,4s"     d="M 218 112 C 284 112, 356 164, 548 164" stroke="hsl(75,58%,57%)" />
+        <path class="edge" style="animation-delay:0s,5s"     d="M 218 112 C 284 112, 356 200, 548 200" stroke="hsl(36,85%,62%)" />
 
         <!-- targets -->
-        <circle class="node-halo" style="animation-delay:0s" cx="552" cy="24"  fill="hsl(200,70%,60%)" r="6" opacity="0" />
-        <circle class="node-halo" style="animation-delay:1s" cx="552" cy="68"  fill="hsl(178,62%,56%)" r="6" opacity="0" />
-        <circle class="node-halo" style="animation-delay:2s" cx="552" cy="112" fill="hsl(150,55%,55%)" r="6" opacity="0" />
-        <circle class="node-halo" style="animation-delay:3s" cx="552" cy="156" fill="hsl(80,58%,57%)"  r="6" opacity="0" />
-        <circle class="node-halo" style="animation-delay:4s" cx="552" cy="200" fill="hsl(36,85%,62%)"  r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:0s" cx="552" cy="20"  fill="hsl(200,70%,60%)" r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:1s" cx="552" cy="56"  fill="hsl(182,62%,56%)" r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:2s" cx="552" cy="92"  fill="hsl(160,55%,55%)" r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:3s" cx="552" cy="128" fill="hsl(120,45%,58%)" r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:4s" cx="552" cy="164" fill="hsl(75,58%,57%)"  r="6" opacity="0" />
+        <circle class="node-halo" style="animation-delay:5s" cx="552" cy="200" fill="hsl(36,85%,62%)"  r="6" opacity="0" />
 
-        <circle cx="552" cy="24"  r="3.5" fill="hsl(200,70%,60%)" />
-        <circle cx="552" cy="68"  r="3.5" fill="hsl(178,62%,56%)" />
-        <circle cx="552" cy="112" r="3.5" fill="hsl(150,55%,55%)" />
-        <circle cx="552" cy="156" r="3.5" fill="hsl(80,58%,57%)" />
+        <circle cx="552" cy="20"  r="3.5" fill="hsl(200,70%,60%)" />
+        <circle cx="552" cy="56"  r="3.5" fill="hsl(182,62%,56%)" />
+        <circle cx="552" cy="92"  r="3.5" fill="hsl(160,55%,55%)" />
+        <circle cx="552" cy="128" r="3.5" fill="hsl(120,45%,58%)" />
+        <circle cx="552" cy="164" r="3.5" fill="hsl(75,58%,57%)" />
         <circle cx="552" cy="200" r="3.5" fill="hsl(36,85%,62%)" />
 
-        <text class="nlab" x="568" y="28"  fill="#8a8a8a">agent</text>
-        <text class="nlab" x="568" y="72"  fill="#8a8a8a">model</text>
-        <text class="nlab" x="568" y="116" fill="#8a8a8a">skill</text>
-        <text class="nlab" x="568" y="160" fill="#8a8a8a">block</text>
+        <text class="nlab" x="568" y="24"  fill="#8a8a8a">agent</text>
+        <text class="nlab" x="568" y="60"  fill="#8a8a8a">model</text>
+        <text class="nlab" x="568" y="96"  fill="#8a8a8a">strategy</text>
+        <text class="nlab" x="568" y="132" fill="#8a8a8a">skill</text>
+        <text class="nlab" x="568" y="168" fill="#8a8a8a">block</text>
         <text class="nlab" x="568" y="204" fill="#8a8a8a">step</text>
 
         <!-- scale rail -->
-        <text x="694" y="28"  fill="#3d3d3d" font-family="'JetBrains Mono',monospace" font-size="9" text-anchor="end">coarse</text>
+        <text x="694" y="24"  fill="#3d3d3d" font-family="'JetBrains Mono',monospace" font-size="9" text-anchor="end">coarse</text>
         <text x="694" y="204" fill="#3d3d3d" font-family="'JetBrains Mono',monospace" font-size="9" text-anchor="end">fine</text>
       </svg>
     </div>
 
     <!-- ============ Ladder ============ -->
     <h2 class="section-label rise" style="animation-delay:.26s">granularity := [coarse &#8594; fine]</h2>
-    <p class="section-note rise" style="animation-delay:.28s">// five levels of the same decision problem. five papers.</p>
+    <p class="section-note rise" style="animation-delay:.28s">// six levels of the same decision problem. six papers.</p>
 
     <!-- ---------- L0: agentic routing ---------- -->
     <section class="rung rise" style="--c: var(--l0); --c-next: var(--l1); animation-delay:.32s">
@@ -551,12 +556,38 @@
       </div>
     </section>
 
-    <!-- ---------- L2: skill level ---------- -->
+    <!-- ---------- L2: strategy level ---------- -->
     <section class="rung rise" style="--c: var(--l2); --c-next: var(--l3); animation-delay:.44s">
       <span class="knob"></span>
       <div class="rung-head">
         <span class="lvl">L2</span>
-        <span class="gran">skill level <span class="arrow">&#8594;</span> which tools an agent reaches for</span>
+        <span class="gran">strategy level <span class="arrow">&#8594;</span> which algorithm handles this input</span>
+      </div>
+      <div class="card">
+        <div class="p-title">Beyond One-Size-Fits-All: Sample-Adaptive Strategy Routing for Vision Token Pruning in MLLMs</div>
+        <div class="p-venue">arXiv 2609.10346 &middot; 2026</div>
+        <p class="p-desc">
+          Every vision-token-pruning method for MLLMs ships as a <em>fixed strategy applied uniformly to all inputs</em>,
+          and benchmark-average rankings hide the fact that the "best" method loses on a large fraction of individual
+          samples &mdash; substantial <em>sample-wise complementarity</em> that a single strategy can never capture.
+          <em>VIP-Router</em> is a lightweight router that reads cheap visual and textual features and, per sample,
+          selects the pruning strategy predicted to fit it best, keeping <em>full-token inference as a fallback</em>
+          when pruning looks harmful. Plug-and-play over existing pruners with trainable parameters at ~0.017% of the
+          backbone, it beats the best fixed strategy at every reduction ratio on pruning-sensitive perception
+          benchmarks &mdash; +26.9% relative accuracy, +22.0% relative utility once token cost is charged.
+        </p>
+        <div class="p-links">
+          <a href="https://arxiv.org/abs/2609.10346" target="_blank" rel="noopener">[arxiv]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- L3: skill/tool level ---------- -->
+    <section class="rung rise" style="--c: var(--l3); --c-next: var(--l4); animation-delay:.5s">
+      <span class="knob"></span>
+      <div class="rung-head">
+        <span class="lvl">L3</span>
+        <span class="gran">skill/tool level <span class="arrow">&#8594;</span> which tools an agent reaches for</span>
       </div>
       <div class="card">
         <div class="p-title">SkillDAG: Self-Evolving Typed Skill Graphs for LLM Skill Selection at Scale</div>
@@ -577,11 +608,11 @@
       </div>
     </section>
 
-    <!-- ---------- L3: block level ---------- -->
-    <section class="rung rise" style="--c: var(--l3); --c-next: var(--l4); animation-delay:.5s">
+    <!-- ---------- L4: block level ---------- -->
+    <section class="rung rise" style="--c: var(--l4); --c-next: var(--l5); animation-delay:.56s">
       <span class="knob"></span>
       <div class="rung-head">
-        <span class="lvl">L3</span>
+        <span class="lvl">L4</span>
         <span class="gran">block level <span class="arrow">&#8594;</span> which submodel runs this frame</span>
       </div>
       <div class="card">
@@ -601,11 +632,11 @@
       </div>
     </section>
 
-    <!-- ---------- L4: timestep-wise multi-granularity ---------- -->
-    <section class="rung rise" style="--c: var(--l4); animation-delay:.56s">
+    <!-- ---------- L5: timestep-wise multi-granularity ---------- -->
+    <section class="rung rise" style="--c: var(--l5); animation-delay:.62s">
       <span class="knob"></span>
       <div class="rung-head">
-        <span class="lvl">L4</span>
+        <span class="lvl">L5</span>
         <span class="gran">timestep-wise <span class="arrow">&#8594;</span> three granularities at once</span>
       </div>
       <div class="card">
@@ -668,7 +699,7 @@
     </section>
 
     <!-- ============ Footer ============ -->
-    <footer class="foot rise" style="animation-delay:.62s">
+    <footer class="foot rise" style="animation-delay:.68s">
       <span>route_anything() &mdash; still returning</span>
       <span><a href="./index.html">[&#8592; back to the dice]</a></span>
     </footer>
