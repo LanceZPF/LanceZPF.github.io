@@ -7,3 +7,7 @@ _site
 .DS_Store
 Thumbs.db
 ehthumbs.db
+
+# Route Anything deployment
+.vercel/
+route-anything-dist/

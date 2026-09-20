@@ -100,7 +100,7 @@
         Homepage: "https://www.omnisource.cn/agent-as-a-router",
         arXiv: "https://arxiv.org/abs/2606.22902",
         Dataset: "https://huggingface.co/datasets/Lance1573/CodeRouterBench",
-        "Route Anything": "./route-anything.html"
+        "Route Anything": "https://route-anything.vercel.app/"
       },
       github: "https://github.com/LanceZPF/agent-as-a-router",
       date: "2026-06-22"
