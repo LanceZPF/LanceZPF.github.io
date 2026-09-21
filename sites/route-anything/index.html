@@ -10,7 +10,8 @@
   <meta property="og:url" content="https://route-anything.vercel.app/" />
   <link rel="canonical" href="https://route-anything.vercel.app/" />
   <title>Route Anything — Pengfei Zhou</title>
-  <link rel="icon" href="./files/about/favicon.ico" />
+  <link rel="icon" href="./favicon.ico?v=continuum" sizes="16x16 32x32 48x48 64x64" />
+  <link rel="icon" type="image/svg+xml" href="./logo.svg?v=continuum" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
@@ -119,6 +120,7 @@
       padding: 28px 0 0;
       font-size: 12px;
     }
+    .topbar .logo { display: block; flex-shrink: 0; }
     .topbar .crumb { color: var(--text-muted); }
     .topbar .crumb b { color: var(--text-dim); font-weight: 400; }
 
@@ -462,10 +464,10 @@
   <div class="wrap">
 
     <!-- ============ Top bar ============ -->
-    <nav class="topbar rise" style="animation-delay:.05s">
-      <a href="https://lancezpf.github.io/">[&#8592; index]</a>
+    <div class="topbar rise" style="animation-delay:.05s">
+      <img class="logo" src="./logo.svg?v=continuum" width="36" height="36" alt="Route Anything logo" />
       <span class="crumb">pengfei zhou <b>/</b> route_anything</span>
-    </nav>
+    </div>
 
     <!-- ============ Hero ============ -->
     <header class="hero rise" style="animation-delay:.12s">
@@ -641,7 +643,7 @@
       </div>
       <div class="card">
         <div class="p-title">SkillDAG: Self-Evolving Typed Skill Graphs for LLM Skill Selection at Scale</div>
-        <div class="p-venue">arXiv 2606.03056 &middot; 2026</div>
+        <div class="p-venue">EMNLP &middot; 2026</div>
         <p class="p-desc">
           Once a skill library grows large enough, picking the right skill stops being a similarity problem and
           becomes a <em>structural</em> one: skills depend on, conflict with, specialize, and duplicate one another,
@@ -751,7 +753,6 @@
     <!-- ============ Footer ============ -->
     <footer class="foot rise" style="animation-delay:.68s">
       <span>route_anything() &mdash; still returning</span>
-      <span><a href="https://lancezpf.github.io/">[&#8592; back to the dice]</a></span>
     </footer>
 
   </div>

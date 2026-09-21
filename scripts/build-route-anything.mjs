@@ -9,7 +9,8 @@ await rm(output, { recursive: true, force: true });
 
 for (const [source, target] of [
   ['sites/route-anything/index.html', 'index.html'],
-  ['files/about/favicon.ico', 'files/about/favicon.ico'],
+  ['sites/route-anything/assets/logo.svg', 'logo.svg'],
+  ['sites/route-anything/assets/favicon.ico', 'favicon.ico'],
   ['files/papers/route_anything/route_anything.pdf', 'files/papers/route_anything/route_anything.pdf'],
 ]) {
   const destination = resolve(output, target);

@@ -5,9 +5,10 @@
 !sites
 !sites/route-anything
 !sites/route-anything/index.html
+!sites/route-anything/assets
+!sites/route-anything/assets/logo.svg
+!sites/route-anything/assets/favicon.ico
 !files
-!files/about
-!files/about/favicon.ico
 !files/papers
 !files/papers/route_anything
 !files/papers/route_anything/route_anything.pdf
